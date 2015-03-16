@@ -1,7 +1,7 @@
 API description of ibm_db driver is given below. If you want to access the same for ibm_db_dbi wrapper, please visit [http://www.python.org/dev/peps/pep-0249/ Python Database API Specification v2.0]
 
 #               API Description for the ibm_db driver 
- ============================================================
+
 <wiki:toc max_depth="3" />
 ###ibm_db.active
 
