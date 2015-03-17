@@ -1,9 +1,11 @@
 API description of ibm_db driver is given below. If you want to access the same for ibm_db_dbi wrapper, please visit [http://www.python.org/dev/peps/pep-0249/ Python Database API Specification v2.0]
 
-#               API Description for the ibm_db driver 
+API Description for the ibm_db driver
+=====================================
+               
 
 Table of Contents
-=================
+-----------------
 * [API Description](#API Description for the ibm_db driver)
   * [ibm_db.active](#ibm_db.active)
   * [ibm_db.autocommit](#ibm_db.autocommit)
@@ -60,7 +62,8 @@ Table of Contents
   * [ibm_db.tables](#ibm_db.tables)
   * [ibm_db.callproc](#ibm_db.callproc)
 
-###ibm_db.active
+ibm_db.active
+-------------
 
 Description
  Py_True/Py_False ibm_db.active(resource connection)
@@ -74,7 +77,8 @@ Return Values
  return Py_False
 
 
-###ibm_db.autocommit
+ibm_db.autocommit
+-----------------
 
 Description
  mixed ibm_db.autocommit ( resource connection [, bool value] )
@@ -100,7 +104,8 @@ Return Values
  Returns TRUE on success or FALSE on failure.
 
 
-###ibm_db.bind_param
+ibm_db.bind_param
+-----------------
 
 Description
  Py_True/Py_None ibm_db.bind_param (resource stmt, int parameter-number,
@@ -137,7 +142,8 @@ Return Values
     Returns Py_True on success or NULL on failure.
 
 
-###ibm_db.client_info
+ibm_db.client_info
+------------------
 
 Description
  object ibm_db.client_info ( resource connection )
@@ -171,7 +177,8 @@ Return Values
  Returns an object on a successful call. Returns FALSE on failure.
 
 
-###ibm_db.close
+ibm_db.close
+------------
 
 Description
  bool ibm_db.close ( resource connection )
@@ -187,7 +194,8 @@ Return Values
  Returns TRUE on success or FALSE on failure.
 
 
-###ibm_db.column_privileges
+ibm_db.column_privileges
+------------------------
 
 Description
  resource ibm_db.column_privileges ( resource connection [, string qualifier
@@ -225,7 +233,8 @@ Return Values
  other users.
 
 
-###ibm_db.columns
+ibm_db.columns
+--------------
 
 Description
  resource ibm_db.columns ( resource connection [, string qualifier
@@ -279,7 +288,8 @@ Return Values
  and 'NO' means that the column is not nullable.
 
 
-###ibm_db.commit
+ibm_db.commit
+-------------
 
 Description
  bool ibm_db.commit ( resource connection )
@@ -300,7 +310,8 @@ Return Values
  Returns TRUE on success or FALSE on failure.
 
 
-###ibm_db.conn_error
+ibm_db.conn_error
+-----------------
 
 Description
  string ibm_db.conn_errormsg ( [resource connection] )
@@ -322,7 +333,8 @@ Return Values
  last connection attempt, ibm_db.conn_errormsg() returns an empty string.
 
 
-###ibm_db.conn_errormsg
+ibm_db.conn_errormsg
+--------------------
 
 Description
  string ibm_db.conn_errormsg ( [resource connection] )
@@ -344,7 +356,8 @@ Return Values
  last connection attempt, ibm_db.conn_errormsg() returns an empty string.
 
 
-###ibm_db.connect
+ibm_db.connect
+--------------
 
 Description
   --   Returns a connection to a database
@@ -422,7 +435,8 @@ Note: Local cataloged database implicit connection
           eg: conn = ibm_db.connect('DSN=sample', '', '')
 </code>
 
-###ibm_db.createdb
+ibm_db.createdb
+---------------
 
 Description
  True/None ibm_db.createdb ( IBM_DBConnection connection, string dbName [, codeSet, mode] )
@@ -442,7 +456,8 @@ Return Value
  Returns True on successful creation of database else return None.
 
 
-###ibm_db.createdbNX
+ibm_db.createdbNX
+-----------------
 
 Description
  True/None ibm_db.createdbNX ( IBM_DBConnection connection, string dbName [, codeSet, mode] )
@@ -462,7 +477,8 @@ Return Value
  Returns True if database already exists or created successfully else return None
 
 
-###ibm_db.cursor_type
+ibm_db.cursor_type
+------------------
 
 Description
  int ibm_db.cursor_type ( resource stmt )
@@ -477,7 +493,8 @@ Return Values
  uses a scrollable cursor.
 
 
-###ibm_db.dropdb
+ibm_db.dropdb
+-------------
 
 Description
  True/None ibm_db.dropdb ( IBM_DBConnection connection, string dbName ) 
@@ -491,7 +508,8 @@ Return Value
        Returns True if specified database dropped successfully else None.
 
 
-###ibm_db.exec_immediate
+ibm_db.exec_immediate
+---------------------
 
 Description
  stmt_handle ibm_db.exec_immediate( IBM_DBConnection connection, string statement
