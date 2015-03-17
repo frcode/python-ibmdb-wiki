@@ -6,10 +6,10 @@ API Description for the ibm_db driver
 
 Table of Contents
 -----------------
-* [API Description](#API Description for the ibm_db driver)
-  * [ibm_db.active](#ibm_db.active)
-  * [ibm_db.autocommit](#ibm_db.autocommit)
-  * [ibm_db.autocommit](#ibm_db.autocommit)
+* [API Description](#API-Description-for-the-ibm_db driver)
+  * [ibm_db.active](#ibm_db-active)
+  * [ibm_db.autocommit](#ibm_db-autocommit)
+  * [ibm_db.autocommit](#ibm_db-autocommit)
   * [ibm_db.bind_param](#ibm_db.bind_param)
   * [ibm_db.client_info](#ibm_db.client_info)
   * [ibm_db.close](#ibm_db.close)
