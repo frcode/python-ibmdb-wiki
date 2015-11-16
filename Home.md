@@ -7,13 +7,13 @@ Provides Python, Django and SQLAlchemy support for IBM DB2 and Informix
 1. The **ibm\_db** Python package contains:
   * **ibm\_db** driver: Python driver for IBM DB2 and IBM Informix databases. Uses the IBM Data Server Driver for ODBC and CLI APIs to connect to IBM DB2 and Informix.
   * **ibm\_db\_dbi**: Python driver for IBM DB2 and IBM Informix databases that complies to the DB-API 2.0 specification.
-> Checkout the [README](http://code.google.com/p/ibm-db/wiki/ibm_db_README) for getting started with ibm\_db and ibm\_db\_dbi
+> Checkout the [[README|ibm_db_README]] for getting started with ibm\_db and ibm\_db\_dbi
 
 2. The **ibm\_db\_django**: Django adapter for IBM DB2 databases. Supports latest Django versions and Django on Jython as well.
-> Checkout the [README](http://code.google.com/p/ibm-db/wiki/ibm_db_django_README) for using DB2 with Django
+> Checkout the [[README|ibm_db_django_README]] for using DB2 with Django
 
 3. The **ibm\_db\_sa**: SQLAlchemy adapter for IBM DB2 and IBM Informix databases. Supports SQLAlchemy 0.7.3 and above.
-> Checkout the [README](http://code.google.com/p/ibm-db/wiki/README) to get you started
+> Checkout the [[README|README]] to get you started
 
 4. The **ibm\_db\_alembic**: Alembic adaptor for IBM DB2 databases. Supports Alembic-0.6.5 and above
 
@@ -49,4 +49,4 @@ Use following pypi web location for downloading source code and binaries
   * Development: opendev at us dot ibm dot com.
 
 ### Contributing to the ibm\_db python project ###
-[Guidelines for Contributions](Contributions.md)
+[[Guidelines for Contributions|Contributions]]
