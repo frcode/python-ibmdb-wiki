@@ -2,9 +2,9 @@
 
 Provides Python, Django and SQLAlchemy support for IBM DB2 and Informix
 
-### Components (Python Eggs): ###
+### Components (Python packages): ###
 
-1. The **ibm\_db** Python Egg contains:
+1. The **ibm\_db** Python package contains:
   * **ibm\_db** driver: Python driver for IBM DB2 and IBM Informix databases. Uses the IBM Data Server Driver for ODBC and CLI APIs to connect to IBM DB2 and Informix.
   * **ibm\_db\_dbi**: Python driver for IBM DB2 and IBM Informix databases that complies to the DB-API 2.0 specification.
 > Checkout the [README](http://code.google.com/p/ibm-db/wiki/ibm_db_README) for getting started with ibm\_db and ibm\_db\_dbi
@@ -17,7 +17,7 @@ Provides Python, Django and SQLAlchemy support for IBM DB2 and Informix
 
 4. The **ibm\_db\_alembic**: Alembic adaptor for IBM DB2 databases. Supports Alembic-0.6.5 and above
 
-Additional information is available in the README files provided in the Python Eggs and also the source repository. .
+Additional information is available in the README files provided in the Python packages and also the source repository. .
 
 ### Downloads ###
 Use following pypi web location for downloading source code and binaries
