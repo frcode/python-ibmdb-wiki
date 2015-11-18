@@ -63,10 +63,10 @@ Table of Contents
 
 **Description**
 
-Checks if the specified connection resource is active.
+Checks if the specified IBM_DBConnection is active.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 
 **Return Values**
 * `True` - the resource is active
@@ -78,10 +78,10 @@ Checks if the specified connection resource is active.
 
 **Description**
 
-Returns and sets the AUTOCOMMIT behavior of the specified connection resource.
+Returns and sets the AUTOCOMMIT behavior of the specified IBM_DBConnection.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * value - One of the following constants:
     * `SQL_AUTOCOMMIT_OFF`
     * `SQL_AUTOCOMMIT_ON`
@@ -96,11 +96,11 @@ Returns and sets the AUTOCOMMIT behavior of the specified connection resource.
 
 
 ### ibm_db.bind_param ###
-`bool ibm_db.bind_param (resource stmt, int parameter-number, string variable [, int parameter-type [, int data-type [, int precision [, int scale [, int size]]]]] )`
+`bool ibm_db.bind_param (IBM_DBStatement stmt, int parameter-number, string variable [, int parameter-type [, int data-type [, int precision [, int scale [, int size]]]]] )`
 
 **Description**
 
-Binds a Python variable to an SQL statement parameter in an IBM_DBStatement resource returned by ibm_db.prepare().
+Binds a Python variable to an SQL statement parameter in an IBM_DBStatement returned by ibm_db.prepare().
 This function gives you more control over the parameter type, data type,
 precision, and scale for the parameter than simply passing the variable as
 part of the optional input array to ibm_db.execute().
@@ -127,29 +127,25 @@ part of the optional input array to ibm_db.execute().
 * `None` - the bind failed
 
 ### ibm_db.callproc ###
-`( resource[, parameters] ) ibm_db.callproc( IBM_DBConnection connection, string procname [, parameters] )`
+`( IBM_DBStatement [, ...] ) ibm_db.callproc( IBM_DBConnection connection, string procname [, parameters] )`
 
 **Description**
 
 Calls a stored procedure with the given name. The parameters tuple must contain one entry for each argument (IN/OUT/INOUT) that the procedure expects. Returns an IBM_DBStatement containing result sets and modified copy of the input parameters. IN parameters are left untouched whereas INOUT/OUT parameters are possibly replaced by new values.
 
-A call to a stored procedure may return zero or more result sets. You can retrieve a row as tuple/dictionary from the IBM_DBStatement resource using ibm_db.fetch_assoc(), ibm_db.fetch_both(), or ibm_db.fetch_tuple(). Alternatively, you can use ibm_db.fetch_row() to move the result set pointer to next row and fetch a column at a time with ibm_db.result().
+A call to a stored procedure may return zero or more result sets. You can retrieve a row as a tuple/dict from the IBM_DBStatement using ibm_db.fetch_assoc(), ibm_db.fetch_both(), or ibm_db.fetch_tuple(). Alternatively, you can use ibm_db.fetch_row() to move the result set pointer to next row and fetch a column at a time with ibm_db.result().
 
 Samples for the API usage can be referred from test_146_CallSPINAndOUTParams.py, test_148_CallSPDiffBindPattern_01.py or test_52949_TestSPIntVarcharXml.py.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
-* procname - A valide strored procedure name
+* connection - A valid IBM_DBConnection
+* procname - A valid strored procedure name
 * parameters - A tuple containing as many parameters as required by the stored procedure.
 
 
 **Return Values**
-* On success, a tuple containing:
-    * resource - an IBM_DBStatement object
-    * parameters - the parameters to the procedure
+* On success, a tuple containing an IBM_DBStatement object followed by the parameters passed to the procedure, if any. 
 * On failure, the value `None`
-
-NOTE: The return value contains a single tuple, so the parameters are not nested. This means that parameter 1 is at index 1, parameter 2 is at index 2, ...
 
 
 ### ibm_db.client_info ###
@@ -160,7 +156,7 @@ NOTE: The return value contains a single tuple, so the parameters are not nested
 Returns a read-only object with information about the database client.
 
 **Parameters**
-* connection - A valid database connection resource returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection returned from ibm_db.connect() or ibm_db.pconnect()
 
 **Return Values**
 * On success, an object with the following fields:
@@ -184,11 +180,12 @@ Returns a read-only object with information about the database client.
 **Description**
 
 Closes a DB2 client connection and returns the corresponding resources to the database server.
+
 If you attempt to close a persistent DB2 client connection created with
 ibm_db.pconnect(), the connection is returned to the pool for the next caller of ibm_db.pconnect() to use.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 
 **Return Values**
 
@@ -196,14 +193,14 @@ Returns `True` on success or `False` on failure.
 
 
 ### ibm_db.column_privileges ###
-`resource ibm_db.column_privileges ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string column-name]]]] )`
+`IBM_DBStatement ibm_db.column_privileges ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string column-name]]]] )`
 
 **Description**
 
 Returns a result set listing the columns and associated privileges for a table.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema which contains the tables. To match all schemas, pass `None` or an empty string.
 * table-name - The name of the table or view. To match all tables in the database, pass `None` or an empty string.
@@ -211,7 +208,7 @@ Returns a result set listing the columns and associated privileges for a table.
 
 **Return Values**
 
-A statement resource with a result set containing rows with the following columns:
+An IBM_DBStatement with a result set containing rows with the following columns:
 * TABLE_CAT - Name of the catalog. The value is `None` if the database does not have catalogs.
 * TABLE_SCHEM - Name of the schema.
 * TABLE_NAME - Name of the table or view.
@@ -223,7 +220,7 @@ A statement resource with a result set containing rows with the following column
 
 
 ### ibm_db.columns ###
-`resource ibm_db.columns ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string column-name]]]] )`
+`IBM_DBStatement ibm_db.columns ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string column-name]]]] )`
 
 **Description**
 
@@ -231,7 +228,7 @@ Returns a result set listing the columns and associated metadata for a table.
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema which contains the tables. To match all schemas, pass '%'.
 * table-name - The name of the table or view. To match all tables in the database, pass `None` or an empty string.
@@ -239,7 +236,7 @@ Returns a result set listing the columns and associated metadata for a table.
 
 **Return Values**
 
-Returns a statement resource with a result set containing rows containing the following columns:
+An IBM_DBStatement with a result set containing rows containing the following columns:
 * TABLE_CAT - Name of the catalog. The value is `None` if this table does not have catalogs.
 * TABLE_SCHEM - Name of the schema.
 * TABLE_NAME - Name of the table or view.
@@ -265,16 +262,15 @@ Returns a statement resource with a result set containing rows containing the fo
 
 **Description**
 
-Commits an in-progress transaction on the specified connection resource and begins a new transaction.
+Commits an in-progress transaction on the specified IBM_DBConnection and begins a new transaction.
 
-Python applications normally default to AUTOCOMMIT mode, so ibm_db.commit() is not necessary unless AUTOCOMMIT has been turned off for the connection resource.
+Python applications normally default to AUTOCOMMIT mode, so ibm_db.commit() is not necessary unless AUTOCOMMIT has been turned off for the IBM_DBConnection.
 
-Note: If the specified connection resource is a persistent connection, all transactions in progress for all applications using that persistent
+Note: If the specified IBM_DBConnection is a persistent connection, all transactions in progress for all applications using that persistent
 connection will be committed. For this reason, persistent connections are not recommended for use in applications that require transactions.
 
 **Parameters**
-
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 
 **Return Values**
 
@@ -288,11 +284,11 @@ Returns `True` on success or `False` on failure.
 
 When not passed any parameters, returns the SQLSTATE representing the reason the last database connection attempt failed.
 
-When passed a valid connection resource returned by ibm_db.connect(), returns the SQLSTATE representing the reason the
-last operation using a connection resource failed.
+When passed a valid IBM_DBConnection returned by ibm_db.connect(), returns the SQLSTATE representing the reason the
+last operation using a IBM_DBConnection failed.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 
 **Return Values**
 
@@ -306,11 +302,11 @@ Returns a string containing the SQLSTATE value or an empty string if there was n
 
 When not passed any parameters, returns a string containing the SQLCODE and error message representing the reason the last database connection attempt failed.
 
-When passed a valid connection resource returned by ibm_db.connect(), returns  a string containing the SQLCODE and error message representing the reason the
-last operation using a connection resource failed.
+When passed a valid IBM_DBConnection returned by ibm_db.connect(), returns  a string containing the SQLCODE and error message representing the reason the
+last operation using a IBM_DBConnection failed.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 
 **Return Values**
 
@@ -318,7 +314,7 @@ Returns a string containing the SQLCODE and error message or an empty string if 
 
 
 ### ibm_db.connect ###
-`IBM_DBConnection ibm_db.connect(string database, string user, string password [, dictionary options [, constant replace_quoted_literal])`
+`IBM_DBConnection ibm_db.connect(string database, string user, string password [, dict options [, constant replace_quoted_literal])`
 
 **Description**
 
@@ -336,7 +332,7 @@ where the parameters represent the following values:
     * password - The password with which you are connecting to the database.
 * user - The username with which you are connecting to the database. For uncataloged connections, you must pass an empty string.
 * password - The password with which you are connecting to the database. For uncataloged connections, you must pass an empty string.
-* options - An dictionary of connection options that affect the behavior of the connection:
+* options - A dict of connection options that affect the behavior of the connection:
     * `SQL_ATTR_AUTOCOMMIT`
         * `SQL_AUTOCOMMIT_ON` - AUTOCOMMIT is on
         * `SQL_AUTOCOMMIT_OFF` - AUTOCOMMIT is off
@@ -377,7 +373,7 @@ Creates a database by using the specified database name, code set and mode
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() by specifying the ATTACH keyword
+* connection - A valid IBM_DBConnection as returned from ibm_db.connect() by specifying the ATTACH keyword
 * dbName - Name of the database that is to be created.
 * codeSet - Database code set information. Note: If the value of the codeSet argument not specified, the database is created in the Unicode code page for DB2 data servers and in the UTF-8 code page for IDS data servers.
 * mode - Database logging mode. Note: This value is applicable only to IDS data servers.
@@ -396,7 +392,7 @@ Creates the database if it does not exist by using the specified database name, 
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() by specifying the ATTACH keyword
+* connection - A valid IBM_DBConnection as returned from ibm_db.connect() by specifying the ATTACH keyword
 * dbName Name of the database that is to be created.
 * codeSet - Database code set information. Note: If the value of the codeSet argument not specified, the database is created in the Unicode code page for DB2 data servers and in the UTF-8 code page for IDS data servers.
 * mode - Database logging mode. Note: This value is applicable only to IDS data servers.
@@ -407,16 +403,16 @@ Returns `True` if database already exists or created successfully else return `N
 
 
 ### ibm_db.cursor_type ###
-`int ibm_db.cursor_type ( resource stmt )`
+`int ibm_db.cursor_type ( IBM_DBStatement stmt )`
 
 **Description**
 
-Returns the cursor type used by a statement resource. Use this to determine
+Returns the cursor type used by an IBM_DBStatement. Use this to determine
 if you are working with a forward-only cursor or scrollable cursor.
 
 **Parameters**
 
-* stmt - A valid statement resource.
+* stmt - A valid IBM_DBStatement.
 
 **Return Values**
 
@@ -432,7 +428,7 @@ Drops the specified database
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() by specifying the ATTACH keyword
+* connection - A valid IBM_DBConnection as returned from ibm_db.connect() by specifying the ATTACH keyword
 * dbName - Name of the database that is to be dropped.
 
 **Return Value**
@@ -441,26 +437,29 @@ Returns `True` if specified database dropped successfully else `None`.
 
 
 ### ibm_db.exec_immediate ###
-`stmt_handle ibm_db.exec_immediate( IBM_DBConnection connection, string statement [, array options] )`
+`stmt_handle ibm_db.exec_immediate( IBM_DBConnection connection, string statement [, dict options] )`
 
 **Description**
 
 Prepares and executes an SQL statement.
-If you plan to interpolate Python variables into the SQL statement,
-understand that this is one of the more common security exposures. Consider
-calling ibm_db.prepare() to prepare an SQL statement with parameter markers for input values. Then you can call ibm_db.execute() to pass in the input
-values and avoid SQL injection attacks.
+
 If you plan to repeatedly issue the same SQL statement with different
 parameters, consider calling ibm_db.prepare() and ibm_db.execute() to
 enable the database server to reuse its access plan and increase the
 efficiency of your database access.
 
+If you plan to interpolate Python variables into the SQL statement,
+understand that this is one of the more common security exposures.
+Consider calling ibm_db.prepare() to prepare an SQL statement with
+parameter markers for input values. Then you can call ibm_db.execute()
+to pass in the input values and avoid SQL injection attacks.
+
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * statement - An SQL statement. The statement cannot contain any parameter markers.
-* options - An dictionary containing statement options. You can use this parameter to request a scrollable cursor on database servers that support this functionality.
-    * `SQL_ATTR_CURSOR_TYPE`
+* options - A dict containing statement options.
+    * `SQL_ATTR_CURSOR_TYPE` - Set the cursor type to one of the following (not supported on all databases):
         * `SQL_CURSOR_FORWARD_ONLY`
         * `SQL_CURSOR_KEYSET_DRIVEN`
         * `SQL_CURSOR_DYNAMIC`
@@ -477,7 +476,7 @@ successfully, or `False` if the database failed to execute the SQL statement.
 
 **Description**
 
-ibm_db.execute() executes an SQL statement that was prepared by ibm_db.prepare(). If the SQL statement returns a result set, for example, a SELECT statement that returns one or more result sets, you can retrieve a row as an tuple/dictionary from the stmt resource using ibm_db.fetch_assoc(), ibm_db.fetch_both(), or ibm_db.fetch_tuple(). Alternatively, you can use ibm_db.fetch_row() to move the result set pointer to the next row and fetch a column at a time from that row with ibm_db.result(). Refer to ibm_db.prepare() for a brief discussion of the advantages of using ibm_db.prepare() and ibm_db.execute() rather than ibm_db.exec_immediate(). To execute stored procedure refer ibm_db.callproc()
+ibm_db.execute() executes an SQL statement that was prepared by ibm_db.prepare(). If the SQL statement returns a result set, for example, a SELECT statement that returns one or more result sets, you can retrieve a row as an tuple/dict from the stmt resource using ibm_db.fetch_assoc(), ibm_db.fetch_both(), or ibm_db.fetch_tuple(). Alternatively, you can use ibm_db.fetch_row() to move the result set pointer to the next row and fetch a column at a time from that row with ibm_db.result(). Refer to ibm_db.prepare() for a brief discussion of the advantages of using ibm_db.prepare() and ibm_db.execute() rather than ibm_db.exec_immediate(). To execute stored procedure refer ibm_db.callproc()
 
 **Parameters**
 * stmt - A prepared statement returned from ibm_db.prepare().
@@ -505,7 +504,7 @@ Use this function for bulk insert/update/delete operations. It uses ArrayInputCh
 
 
 ### ibm_db.fetch_tuple ###
-`tuple ibm_db.fetch_tuple ( resource stmt [, int row_number] )`
+`tuple ibm_db.fetch_tuple ( IBM_DBStatement stmt [, int row_number] )`
 
 **Description**
 
@@ -521,39 +520,39 @@ Returns a tuple, indexed by column position, representing a row in a result set.
 
 
 ### ibm_db.fetch_assoc ###
-`dictionary ibm_db.fetch_assoc ( resource stmt [, int row_number] )`
+`dict ibm_db.fetch_assoc ( IBM_DBStatement stmt [, int row_number] )`
 
 **Description**
 
-Returns a dictionary, indexed by column name, representing a row in a result set.
+Returns a dict, indexed by column name, representing a row in a result set.
 
 **Parameters**
 * stmt - A valid stmt resource containing a result set.
 * row_number - Requests a specific 1-indexed row from the result set. Passing this parameter results in a warning if the result set uses a forward-only cursor.
 
 **Return Values**
-* Returns a dictionary containing all the column values indexed by column name for the selected row or the next row if row number was not specified.
+* Returns a dict containing all the column values indexed by column name for the selected row or the next row if row number was not specified.
 * Returns `False` if there are no rows left in the result set, or if the row requested by row_number does not exist in the result set.
 
 
 ### ibm_db.fetch_both ###
-`dictionary ibm_db.fetch_both ( resource stmt [, int row_number] )`
+`dict ibm_db.fetch_both ( IBM_DBStatement stmt [, int row_number] )`
 
 **Description**
 
-Returns a dictionary, indexed by column name and position, representing a row in a result set.
+Returns a dict, indexed by column name and position, representing a row in a result set.
 
 **Parameters**
 * stmt - A valid stmt resource containing a result set.
 * row_number - Requests a specific 1-indexed row from the result set. Passing this parameter results in a warning if the result set uses a forward-only cursor.
 
 **Return Values**
-* Returns a dictionary containing all the column values indexed by column name and by 0-indexed column number for the selected row or the next row if row number was not specified.
+* Returns a dict containing all the column values indexed by column name and by 0-indexed column number for the selected row or the next row if row number was not specified.
 * Returns `False` if there are no rows left in the result set, or if the row requested by row_number does not exist in the result set.
 
 
 ### ibm_db.fetch_row ###
-`bool ibm_db.fetch_row ( resource stmt [, int row_number] )`
+`bool ibm_db.fetch_row ( IBM_DBStatement stmt [, int row_number] )`
 
 **Description**
 
@@ -579,153 +578,104 @@ the requested row does not exist in the result set.
 
 
 ### ibm_db.field_display_size ###
-`int ibm_db.field_display_size ( resource stmt, mixed column )`
+`int ibm_db.field_display_size ( IBM_DBStatement stmt, mixed column )`
 
 **Description**
 
-Returns the maximum number of bytes required to display a column in a result
-set.
+Returns the maximum number of bytes required to display a column in a result set.
 
 **Parameters**
-
-stmt
-Specifies a statement resource containing a result set.
-column
-Specifies the column in the result set. This can either be an integer
-
-representing the 0-indexed position of the column, or a string containing the
-name of the column.
+* stmt - Specifies an IBM_DBStatement containing a result set.
+* column - Specifies the column in the result set. This can either be an integer representing the 0-indexed position of the column or a string containing the name of the column.
 
 **Return Values**
 
 Returns an integer value with the maximum number of bytes required to display
-the specified column.
-If the column does not exist in the result set, ibm_db.field_display_size()
-returns `False`.
+the specified column or `False` if the column does not exist.
 
 
 ### ibm_db.field_name ###
-`string ibm_db.field_name ( resource stmt, mixed column )`
+`string ibm_db.field_name ( IBM_DBStatement stmt, mixed column )`
 
 **Description**
 
 Returns the name of the specified column in the result set.
 
 **Parameters**
-
-stmt
-Specifies a statement resource containing a result set.
-column
-Specifies the column in the result set. This can either be an integer
-
-representing the 0-indexed position of the column, or a string containing the
-name of the column.
+* stmt - Specifies an IBM_DBStatement containing a result set.
+* column - Specifies the column in the result set. This can either be an integer representing the 0-indexed position of the column or a string containing the name of the column.
 
 **Return Values**
 
-Returns a string containing the name of the specified column. If the
-specified column does not exist in the result set, ibm_db.field_name()
-returns `False`.
+Returns a string containing the name of the specified column or `False` if the column does not exist.
 
 
 ### ibm_db.field_num ###
-`int ibm_db.field_num ( resource stmt, mixed column )`
+`int ibm_db.field_num ( IBM_DBStatement stmt, mixed column )`
 
 **Description**
 
 Returns the position of the named column in a result set.
 
 **Parameters**
-
-stmt
-Specifies a statement resource containing a result set.
-column
-Specifies the column in the result set. This can either be an integer
-
-representing the 0-indexed position of the column, or a string containing the
-name of the column.
+* stmt - Specifies an IBM_DBStatement containing a result set.
+* column - Specifies the column in the result set. This can either be an integer representing the 0-indexed position of the column or a string containing the name of the column.
 
 **Return Values**
 
-Returns an integer containing the 0-indexed position of the named column in
-the result set. If the specified column does not exist in the result set,
-ibm_db.field_num() returns `False`.
+Returns an integer containing the 0-indexed position of the specified column or `False` if the column does not exist.
 
 
 ### ibm_db.field_precision ###
-`int ibm_db.field_precision ( resource stmt, mixed column )`
+`int ibm_db.field_precision ( IBM_DBStatement stmt, mixed column )`
 
 **Description**
 
 Returns the precision of the indicated column in a result set.
 
 **Parameters**
-
-stmt
-Specifies a statement resource containing a result set.
-column
-Specifies the column in the result set. This can either be an integer
-
-representing the 0-indexed position of the column, or a string containing the
-name of the column.
+* stmt - Specifies an IBM_DBStatement containing a result set.
+* column - Specifies the column in the result set. This can either be an integer representing the 0-indexed position of the column or a string containing the name of the column.
 
 **Return Values**
 
-Returns an integer containing the precision of the specified column. If the
-specified column does not exist in the result set, ibm_db.field_precision()
-returns `False`.
+Returns an integer containing the precision of the specified column or `False` if the column does not exist.
 
 
 ### ibm_db.field_scale ###
-`int ibm_db.field_scale ( resource stmt, mixed column )`
+`int ibm_db.field_scale ( IBM_DBStatement stmt, mixed column )`
 
 **Description**
 
 Returns the scale of the indicated column in a result set.
 
 **Parameters**
-
-stmt
-Specifies a statement resource containing a result set.
-column
-Specifies the column in the result set. This can either be an integer
-
-representing the 0-indexed position of the column, or a string containing the
-name of the column.
+* stmt - Specifies an IBM_DBStatement containing a result set.
+* column - Specifies the column in the result set. This can either be an integer representing the 0-indexed position of the column or a string containing the name of the column.
 
 **Return Values**
 
-Returns an integer containing the scale of the specified column. If the
-specified column does not exist in the result set, ibm_db.field_scale()
-returns `False`.
+Returns an integer containing the scale of the specified column or `False` if the column does not exist.
 
 
 ### ibm_db.field_type ###
-`string ibm_db.field_type ( resource stmt, mixed column )`
+`string ibm_db.field_type ( IBM_DBStatement stmt, mixed column )`
 
 **Description**
 
 Returns the data type of the indicated column in a result set.
 
 **Parameters**
-
-stmt
-Specifies a statement resource containing a result set.
-column
-Specifies the column in the result set. This can either be an integer
-
-representing the 0-indexed position of the column, or a string containing the
-name of the column.
+* stmt - Specifies an IBM_DBStatement containing a result set.
+* column - Specifies the column in the result set. This can either be an integer representing the 0-indexed position of the column or a string containing the name of the column.
 
 **Return Values**
 
-Returns a string containing the defined data type of the specified column.
-If the specified column does not exist in the result set, ibm_db.field_type()
-returns `False`.
+Returns a string containing the defined data type of the specified column or `False` if the column does not exist.
 
 
 ### ibm_db.field_width ###
-`int ibm_db.field_width ( resource stmt, mixed column )`
+`int ibm_db.field_width ( IBM_DBStatement stmt, mixed column )`
 
 **Description**
 
@@ -734,24 +684,16 @@ set. This is the maximum width of the column for a fixed-length data type, or
 the actual width of the column for a variable-length data type.
 
 **Parameters**
-
-stmt
-Specifies a statement resource containing a result set.
-column
-Specifies the column in the result set. This can either be an integer
-
-representing the 0-indexed position of the column, or a string containing the
-name of the column.
+* stmt - Specifies an IBM_DBStatement containing a result set.
+* column - Specifies the column in the result set. This can either be an integer representing the 0-indexed position of the column or a string containing the name of the column.
 
 **Return Values**
 
-Returns an integer containing the width of the specified character or binary
-data type column in a result set. If the specified column does not exist in
-the result set, ibm_db.field_width() returns `False`.
+Returns an integer containing the width of the specified character or binary column; or `False` if the column does not exist.
 
 
 ### ibm_db.foreign_keys ###
-`resource ibm_db.foreign_keys ( IBM_DBConnection connection, string qualifier, string schema, string table-name )`
+`IBM_DBStatement ibm_db.foreign_keys ( IBM_DBConnection connection, string qualifier, string schema, string table-name )`
 
 **Description**
 
@@ -759,54 +701,42 @@ Returns a result set listing the foreign keys for a table.
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema which contains the tables. If schema is `None`, the current schema for the connection is used instead.
-table-name
-The name of the table.
+* table-name - The name of the table.
 
 **Return Values**
 
-Returns a statement resource with a result set containing rows describing the
-foreign keys for the specified table. The result set is composed of the
-following columns:
-Column name -   Description
-PKTABLE_CAT - Name of the catalog for the table containing the primary key.
-The value is `None` if this table does not have catalogs.
-PKTABLE_SCHEM - Name of the schema for the table containing the primary key.
-PKTABLE_NAME - Name of the table containing the primary key.
-PKCOLUMN_NAME - Name of the column containing the primary key.
-FKTABLE_CAT - Name of the catalog for the table containing the foreign key.
-The value is `None` if this table does not have catalogs.
-FKTABLE_SCHEM - Name of the schema for the table containing the foreign key.
-FKTABLE_NAME - Name of the table containing the foreign key.
-FKCOLUMN_NAME - Name of the column containing the foreign key.
-KEY_SEQ - 1-indexed position of the column in the key.
-UPDATE_RULE - Integer value representing the action applied to the foreign
-key when the SQL operation is UPDATE.
-DELETE_RULE - Integer value representing the action applied to the foreign
-key when the SQL operation is DELETE.
-FK_NAME - The name of the foreign key.
-PK_NAME - The name of the primary key.
-DEFERRABILITY - An integer value representing whether the foreign key
-deferrability is SQL_INITIALLY_DEFERRED, SQL_INITIALLY_IMMEDIATE, or
-SQL_NOT_DEFERRABLE.
+Returns an IBM_DBStatement with a result set containing the following columns:
+* PKTABLE_CAT - Name of the catalog for the table containing the primary key. The value is `None` if this table does not have catalogs.
+* PKTABLE_SCHEM - Name of the schema for the table containing the primary key.
+* PKTABLE_NAME - Name of the table containing the primary key.
+* PKCOLUMN_NAME - Name of the column containing the primary key.
+* FKTABLE_CAT - Name of the catalog for the table containing the foreign key. The value is `None` if this table does not have catalogs.
+* FKTABLE_SCHEM - Name of the schema for the table containing the foreign key.
+* FKTABLE_NAME - Name of the table containing the foreign key.
+* FKCOLUMN_NAME - Name of the column containing the foreign key.
+* KEY_SEQ - 1-indexed position of the column in the key.
+* UPDATE_RULE - Integer value representing the action applied to the foreign key when the SQL operation is UPDATE.
+* DELETE_RULE - Integer value representing the action applied to the foreign key when the SQL operation is DELETE.
+* FK_NAME - The name of the foreign key.
+* PK_NAME - The name of the primary key.
+* DEFERRABILITY - An integer value representing whether the foreign key deferrability is SQL_INITIALLY_DEFERRED, SQL_INITIALLY_IMMEDIATE, or SQL_NOT_DEFERRABLE.
 
 
 ### ibm_db.free_result ###
-`bool ibm_db.free_result ( resource stmt )`
+`bool ibm_db.free_result ( IBM_DBStatement stmt )`
 
 **Description**
 
-Frees the system and database resources that are associated with a result
+Frees the system and IBM_DBConnections that are associated with a result
 set. These resources are freed implicitly when a script finishes, but you
 can call ibm_db.free_result() to explicitly free the result set resources
 before the end of the script.
 
 **Parameters**
-
-stmt
-A valid statement resource.
+* stmt - A valid IBM_DBStatement.
 
 **Return Values**
 
@@ -814,43 +744,40 @@ Returns `True` on success or `False` on failure.
 
 
 ### ibm_db.free_stmt ###
-`bool ibm_db.free_stmt ( resource stmt )`
+`bool ibm_db.free_stmt ( IBM_DBStatement stmt )` **(DEPRECATED)**
 
 **Description**
 
-Frees the system and database resources that are associated with a statement
+Frees the system and IBM_DBConnections that are associated with a statement
 resource. These resources are freed implicitly when a script finishes, but
 you can call ibm_db.free_stmt() to explicitly free the statement resources
 before the end of the script.
 
-**Parameters**
+This API is deprecated. Applications should use ibm_db.free_result instead.
 
-stmt
-A valid statement resource.
+**Parameters**
+* stmt - A valid IBM_DBStatement.
 
 **Return Values**
 
 Returns `True` on success or `False` on failure.
-DEPRECATED
+
 
 
 ### ibm_db.get_option ###
-`mixed ibm_db.get_option ( resource resc, int options, int type )`
+`mixed ibm_db.get_option ( mixed resc, int options, int type )`
 
 **Description**
 
-Returns a value, that is the current setting of a connection or statement
+Returns a value that is the current setting of a connection or statement
 attribute.
 
 **Parameters**
-
-resc
-A valid connection or statement resource containing a result set.
-options
-The options to be retrieved
-type
-A field that specifies the resource type (1 = Connection,
-non - 1 = Statement)
+* resc - A valid IBM_DBConnection or IBM_DBStatement containing a result set.
+* options - The options to be retrieved
+* type - The type of resc
+    * `0` - IBM_DBStatement
+    * `1` - IBM_DBConnection
 
 **Return Values**
 
@@ -858,7 +785,7 @@ Returns the current setting of the resource attribute provided.
 
 
 ### ibm_db.next_result ###
-`resource ibm_db.next_result ( resource stmt )`
+`IBM_DBStatement ibm_db.next_result ( IBM_DBStatement stmt )`
 
 **Description**
 
@@ -870,19 +797,17 @@ result sets from a stored procedure you must call the ibm_db.next_result()
 function and return the result to a uniquely named Python variable.
 
 **Parameters**
-
-stmt
-A prepared statement returned from ibm_db.exec_immediate() or ibm_db.execute().
+* stmt - A prepared statement returned from ibm_db.exec_immediate() or ibm_db.execute().
 
 **Return Values**
 
-Returns a new statement resource containing the next result set if the stored
+Returns a new IBM_DBStatement containing the next result set if the stored
 procedure returned another result set. Returns `False` if the stored procedure
 did not return another result set.
 
 
 ### ibm_db.num_fields ###
-`int ibm_db.num_fields ( resource stmt )`
+`int ibm_db.num_fields ( IBM_DBStatement stmt )`
 
 **Description**
 
@@ -892,25 +817,24 @@ for result sets returned by stored procedures, where your application cannot
 otherwise know how to retrieve and use the results.
 
 **Parameters**
-
-stmt
-A valid statement resource containing a result set.
+* stmt - A valid IBM_DBStatement containing a result set.
 
 **Return Values**
 
 Returns an integer value representing the number of fields in the result set
-associated with the specified statement resource. Returns `False` if the
-statement resource is not a valid input value.
+associated with the specified IBM_DBStatement. Returns `False` if stmt is not
+a valid IBM_DBStatement object.
 
 
 ### ibm_db.num_rows ###
-`int ibm_db.num_rows ( resource stmt )`
+`int ibm_db.num_rows ( IBM_DBStatement stmt )`
 
 **Description**
 
 Returns the number of rows deleted, inserted, or updated by an SQL statement.
+
 To determine the number of rows that will be returned by a SELECT statement,
-issue `SELECT COUNT(*) ` with the same predicates as your intended SELECT
+issue `SELECT COUNT(*)` with the same predicates as your intended SELECT
 statement and retrieve the value. If your application logic checks the number
 of rows returned by a SELECT statement and branches if the number of rows is
 0, consider modifying your application to attempt to return the first row
@@ -926,9 +850,7 @@ return value of the fetch functions to achieve the equivalent functionality
 with much better performance.
 
 **Parameters**
-
-stmt
-A valid stmt resource containing a result set.
+* stmt - A valid stmt resource containing a result set.
 
 **Return Values**
 
@@ -937,141 +859,62 @@ specified statement handle.
 
 
 ### ibm_db.pconnect ###
+`IBM_DBStatement ibm_db.pconnect ( string database, string username, string password [, dict options] )`
 
 **Description**
 
---   Returns a persistent connection to a database
-resource ibm_db.pconnect ( string database, string username, string password
-[, dictionary options] )
 Returns a persistent connection to an IBM DB2 Universal Database,
-IBM Cloudscape, Apache Derby or Informix.
-Calling ibm_db.close() on a persistent connection always returns `True`, but
-the underlying DB2 client connection remains open and waiting to serve the
-next matching ibm_db.pconnect() request.
+IBM Cloudscape, Apache Derby or Informix. Persistent connections
+are not closed when ibm_db.close is called on them. Instead, they
+are returned to a process-wide connection pool. The next time
+ibm_db.pconnect is called, the connection pool is searched for a
+matching connection. If one is found, it is returned to the application
+instead of attempting a new connection.
 
-**Parameters**
-
-database
-The database alias in the DB2 client catalog.
-username
-The username with which you are connecting to the database.
-password
-The password with which you are connecting to the database.
-options
-An associative array of connection options that affect the behavior of
-
-the connection,
-where valid array keys include:
-autocommit
-Passing the DB2_AUTOCOMMIT_ON value turns autocommit on for this
-
-connection handle.
-Passing the DB2_AUTOCOMMIT_OFF value turns autocommit off for
-
-this connection handle.
-DB2_ATTR_CASE
-Passing the DB2_CASE_NATURAL value specifies that column names
-
-are returned in natural case.
-Passing the DB2_CASE_LOWER value specifies that column names are
-
-returned in lower case.
-Passing the DB2_CASE_UPPER value specifies that column names are
-
-returned in upper case.
-CURSOR
-Passing the `SQL_CURSOR_FORWARD_ONLY` value specifies a
-
-forward-only cursor for a statement resource.  This is the default cursor
-type and is supported on all database servers.
-Passing the `SQL_CURSOR_KEYSET_DRIVEN` value specifies a scrollable
-
-cursor for a statement resource. This mode enables random access to rows in a
-result set, but currently is supported only by IBM DB2 Universal Database.
-set_replace_quoted_literal
-This variable indicates if the CLI Connection attribute SQL_ATTR_REPLACE_QUOTED_LITERAL is to be set or not
-
-
-To turn it ON pass  ibm_db.QUOTED_LITERAL_REPLACEMENT_ON
-
-To turn it OFF pass ibm_db.QUOTED_LITERAL_REPLACEMENT_OFF
-
-Default Setting: - ibm_db.QUOTED_LITERAL_REPLACEMENT_ON
-
-
-**Return Values**
-
-Returns a connection handle resource if the connection attempt is successful.
-ibm_db.pconnect() tries to reuse an existing connection resource that exactly
-matches the database, username, and password parameters. If the connection
-attempt fails, ibm_db.pconnect() returns `False`.
-
-```xml
-
-Note: Local cataloged database implicit connection
-i) If database parameter specified is a local database alias name with blank userid and password
-then connect/pconnect API will use current logged in user's userid for implicit connection
-eg: conn = ibm_db.pconnect('sample', '', '')
-ii) If database parameter is a connection string with value "DSN=database_name" then
-connect/pconnect API will use current logged in user's userid for implicit connection
-eg: conn = ibm_db.pconnect('DSN=sample', '', '')
-```
+For more information on parameters and return values, see [ibm_db.connect](#ibm_dbconnect).
 
 ### ibm_db.prepare ###
 `IBMDB_Statement ibm_db.prepare ( IBM_DBConnection connection, string statement [, array options] )`
 
 **Description**
 
+Creates a prepared SQL statement which can include 0 or more parameter markers
+(? characters) representing parameters for input,output, or input/output.
+You can pass parameters to the prepared statement using ibm_db.bind_param(),
+or for input values only, as an array passed to ibm_db.execute().
 
-ibm_db.prepare() creates a prepared SQL statement which can include 0 or
-more parameter markers (? characters) representing parameters for input,
-output, or input/output. You can pass parameters to the prepared statement
-using ibm_db.bind_param(), or for input values only, as an array passed to
-ibm_db.execute().
-There are three main advantages to using prepared statements in your
-application:
-Performance: when you prepare a statement, the database server
-creates an optimized access plan for retrieving data with that
-statement. Subsequently issuing the prepared statement with
-ibm_db.execute() enables the statements to reuse that access plan
-and avoids the overhead of dynamically creating a new access plan
-for every statement you issue.
-Security: when you prepare a statement, you can include parameter
-markers for input values. When you execute a prepared statement
-with input values for placeholders, the database server checks each
-input value to ensure that the type matches the column definition or
-parameter definition..
+There are two main advantages to using prepared statements in your application:
+* Performance: when you prepare a statement, the database server
+    creates an optimized access plan for retrieving data with that
+    statement. Subsequently issuing the prepared statement with
+    ibm_db.execute() enables the statements to reuse that access plan
+    and avoids the overhead of dynamically creating a new access plan
+    for every statement you issue.
+* Security: when you prepare a statement, you can include parameter
+    markers for input values. When you execute a prepared statement
+    with input values for placeholders, the database server checks each
+    input value to ensure that the type matches the column definition or
+    parameter definition.
 
 **Parameters**
-
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
-statement
-An SQL statement, optionally containing one or more parameter markers.
-options
-An dictionary containing statement options. You can use this parameter
-to request a scrollable cursor on database servers that support this
-functionality.
-SQL_ATTR_CURSOR_TYPE
-Passing the `SQL_CURSOR_FORWARD_ONLY` value requests a forward-only
-cursor for this SQL statement. This is the default type of
-cursor, and it is supported by all database servers. It is also
-much faster than a scrollable cursor.
-Passing the `SQL_CURSOR_KEYSET_DRIVEN` value requests a scrollable
-cursor for this SQL statement. This type of cursor enables you
-to fetch rows non-sequentially from the database server. However,
-it is only supported by DB2 servers, and is much slower than
-forward-only cursors.
+* connection - A valid IBM_DBConnection
+* statement - An SQL statement, optionally containing one or more parameter markers.
+* options - A dict containing statement options.
+    * `SQL_ATTR_CURSOR_TYPE` - Set the cursor type to one of the following (not supported on all databases):
+        * `SQL_CURSOR_FORWARD_ONLY`
+        * `SQL_CURSOR_KEYSET_DRIVEN`
+        * `SQL_CURSOR_DYNAMIC`
+        * `SQL_CURSOR_STATIC`
 
 **Return Values**
 
 Returns a IBM_DBStatement object if the SQL statement was successfully
-parsed and prepared by the database server. Returns `False` if the database
-server returned an error. You can determine which error was returned by
-calling ibm_db.stmt_error() or ibm_db.stmt_errormsg().
+parsed and prepared by the database server or `False` if the database
+server returned an error.
 
 
 ### ibm_db.primary_keys ###
-`resource ibm_db.primary_keys ( IBM_DBConnection connection, string qualifier, string schema, string table-name )`
+`IBM_DBStatement ibm_db.primary_keys ( IBM_DBConnection connection, string qualifier, string schema, string table-name )`
 
 **Description**
 
@@ -1079,16 +922,15 @@ Returns a result set listing the primary keys for a table.
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema which contains the tables. If schema is `None`, the current schema for the connection is used instead.
 * table-name - The name of the table.
 
 **Return Values**
 
-Returns a statement resource with a result set containing the following columns:
-* TABLE_CAT - Name of the catalog for the table containing the primary key.
-* The value is `None` if this table does not have catalogs.
+Returns an IBM_DBStatement with a result set containing the following columns:
+* TABLE_CAT - Name of the catalog for the table containing the primary key. The value is `None` if this table does not have catalogs.
 * TABLE_SCHEM - Name of the schema for the table containing the primary key.
 * TABLE_NAME - Name of the table containing the primary key.
 * COLUMN_NAME - Name of the column containing the primary key.
@@ -1097,7 +939,7 @@ Returns a statement resource with a result set containing the following columns:
 
 
 ### ibm_db.procedure_columns ###
-`resource ibm_db.procedure_columns ( IBM_DBConnection connection, string qualifier, string schema, string procedure, string parameter )`
+`IBM_DBStatement ibm_db.procedure_columns ( IBM_DBConnection connection, string qualifier, string schema, string procedure, string parameter )`
 
 **Description**
 
@@ -1105,7 +947,7 @@ Returns a result set listing the parameters for one or more stored procedures
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema which contains the procedures. This parameter accepts a search pattern containing _and % as wildcards.
 * procedure - The name of the procedure. This parameter accepts a search pattern containing_ and % as wildcards.
@@ -1113,7 +955,7 @@ Returns a result set listing the parameters for one or more stored procedures
 
 **Return Values**
 
-Returns a statement resource with a result set containing the following columns:
+Returns an IBM_DBStatement with a result set containing the following columns:
 * PROCEDURE_CAT - The catalog that contains the procedure. The value is `None` if this table does not have catalogs.
 * PROCEDURE_SCHEM - Name of the schema that contains the stored procedure.
 * PROCEDURE_NAME - Name of the procedure.
@@ -1148,14 +990,14 @@ Returns a result set listing the stored procedures registered in a database.
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema which contains the procedures. This parameter accepts a search pattern containing _and % as wildcards.
 * procedure - The name of the procedure. This parameter accepts a search pattern containing_ and % as wildcards.
 
 **Return Values**
 
-Returns a statement resource with a result set containing the following columns:
+Returns an IBM_DBStatement with a result set containing the following columns:
 * PROCEDURE_CAT - The catalog that contains the procedure. The value is `None` if this table does not have catalogs.
 * PROCEDURE_SCHEM - Name of the schema that contains the stored procedure.
 * PROCEDURE_NAME - Name of the procedure.
@@ -1175,7 +1017,7 @@ Drop and then recreates a database by using the specified database name, code se
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() by specifying the ATTACH keyword
+* connection - A valid IBM_DBConnection as returned from ibm_db.connect() by specifying the ATTACH keyword
 * dbName - Name of the database that is to be created.
 * codeSet - Database code set information. Note: If the value of the codeSet argument not specified, the database is created in the Unicode code page for DB2 data servers and in the UTF-8 code page for IDS data servers.
 * mode - Database logging mode. Note: This value is applicable only to IDS data servers.
@@ -1186,7 +1028,7 @@ Returns `True` if specified database created successfully else return `None`.
 
 
 ### ibm_db.result ###
-`mixed ibm_db.result ( resource stmt, mixed column )`
+`mixed ibm_db.result ( IBM_DBStatement stmt, mixed column )`
 
 **Description**
 
@@ -1210,18 +1052,18 @@ set. Returns `None` if the field does not exist, and issues a warning.
 **Description**
 
 bool ibm_db.rollback ( IBM_DBConnection connection )
-Rolls back an in-progress transaction on the specified connection resource
+Rolls back an in-progress transaction on the specified IBM_DBConnection
 and begins a new transaction. Python applications normally default to
 AUTOCOMMIT mode, so ibm_db.rollback() normally has no effect unless
-AUTOCOMMIT has been turned off for the connection resource.
-Note: If the specified connection resource is a persistent connection, all
+AUTOCOMMIT has been turned off for the IBM_DBConnection.
+Note: If the specified IBM_DBConnection is a persistent connection, all
 transactions in progress for all applications using that persistent
 connection will be rolled back. For this reason, persistent connections are
 not recommended for use in applications that require transactions.
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 
 **Return Values**
 
@@ -1306,7 +1148,7 @@ compliance.
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 
 **Return Values**
 
@@ -1314,18 +1156,18 @@ Returns an object on a successful call. Returns `False` on failure.
 
 
 ### ibm_db.set_option ###
-`bool ibm_db.set_option ( resource resc, array options, int type )`
+`bool ibm_db.set_option ( mixed resc, array options, int type )`
 
 **Description**
 
-Sets options for a connection or statement resource. You cannot set options for result set resources.
+Sets options for a IBM_DBConnection or IBM_DBStatement. You cannot set options for result set resources.
 
 **Parameters**
-* resc - A valid connection or statement resource.
+* resc - A valid IBM_DBConnection or IBM_DBStatement.
 * options - The options to be set
-* type - A field that specifies the resource type
-    * 0 - Statement resource
-    * 1 - Connection resource
+* type - A field that specifies the type of resc
+    * 0 - IBM_DBStatement
+    * 1 - IBM_DBConnection
 
 **Return Values**
 
@@ -1333,14 +1175,14 @@ Returns `True` on success or `False` on failure
 
 
 ### ibm_db.special_columns ###
-`resource ibm_db.special_columns ( IBM_DBConnection connection, string qualifier, string schema, string table_name, int scope )`
+`IBM_DBStatement ibm_db.special_columns ( IBM_DBConnection connection, string qualifier, string schema, string table_name, int scope )`
 
 **Description**
 
 Returns a result set listing the unique row identifier columns for a table.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema which contains the tables.
 * table_name - The name of the table.
@@ -1351,7 +1193,7 @@ Returns a result set listing the unique row identifier columns for a table.
 
 **Return Values**
 
-Returns a statement resource with a result set containing the following columns:
+Returns an IBM_DBStatement with a result set containing the following columns:
 * SCOPE - Integer value representing the minimum duration for which the unique row identifier is valid.
     * 0 (SQL_SCOPE_CURROW) - Row identifier is valid only while the cursor is positioned on the row.
     * 1 (SQL_SCOPE_TRANSACTION) - Row identifier is valid for the duration of the transaction.
@@ -1367,14 +1209,14 @@ Returns a statement resource with a result set containing the following columns:
 
 
 ### ibm_db.statistics ###
-`resource ibm_db.statistics ( IBM_DBConnection connection, string qualifier, string schema, string table-name, bool unique )`
+`IBM_DBStatement ibm_db.statistics ( IBM_DBConnection connection, string qualifier, string schema, string table-name, bool unique )`
 
 **Description**
 
 Returns a result set listing the index and statistics for a table.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema that contains the table. If this parameter is `None`, the statistics and indexes are returned for the schema of the current user.
 * table_name The name of the table.
@@ -1384,7 +1226,7 @@ Returns a result set listing the index and statistics for a table.
 
 **Return Values**
 
-Returns a statement resource with a result set containing the following columns:
+Returns an IBM_DBStatement with a result set containing the following columns:
 * TABLE_CAT - The catalog that contains the table. The value is `None` if this table does not have catalogs.
 * TABLE_SCHEM - Name of the schema that contains the table.
 * TABLE_NAME - Name of the table.
@@ -1408,64 +1250,64 @@ Returns a statement resource with a result set containing the following columns:
 
 
 ### ibm_db.stmt_error ###
-`string ibm_db.stmt_errormsg ( resource stmt )`
+`string ibm_db.stmt_error ( [IBM_DBStatement stmt] )`
 
 **Description**
 
-Returns a string containing the last SQL statement error message.
-If you do not pass a statement resource as an argument to
-ibm_db.stmt_errormsg(), the driver returns the error message associated with
-the last attempt to return a statement resource, for example, from
-ibm_db.prepare() or ibm_db.exec_immediate().
+When not passed any parameters, returns the SQLSTATE representing the reason
+the last attempt to return an IBM_DBStatement via ibm_db.prepare(),
+ibm_db.exec_immediate(), or ibm_db.callproc() failed.
+
+When passed a valid IBM_DBStatement, returns the SQLSTATE representing the
+reason the last operation using the resource failed.
 
 **Parameters**
-
-stmt
-A valid statement resource.
+* stmt - A valid IBM_DBStatement.
 
 **Return Values**
 
-Returns a string containing the error message and SQLCODE value for the last
-error that occurred issuing an SQL statement.
+Returns a string containing the SQLSTATE value or an empty string if there was no error.
 
 
 ### ibm_db.stmt_errormsg ###
-`string ibm_db.stmt_errormsg ( resource stmt )`
+`string ibm_db.stmt_errormsg ( [IBM_DBStatement stmt] )`
 
 **Description**
 
-Returns a string containing the last SQL statement error message.
-If you do not pass a statement resource as an argument to
-ibm_db.stmt_errormsg(), the driver returns the error message associated with
-the last attempt to return a statement resource, for example, from
-ibm_db.prepare() or ibm_db.exec_immediate().
+
+When not passed any parameters, returns a string containing
+the SQLCODE and error message representing the reason
+the last attempt to return an IBM_DBStatement via ibm_db.prepare(),
+ibm_db.exec_immediate(), or ibm_db.callproc() failed.
+
+When passed a valid IBM_DBStatement, returns a string containing
+the SQLCODE and error message representing the reason the last
+operation using the resource failed.
 
 **Parameters**
-
-* stmt - A valid statement resource.
+* stmt - A valid IBM_DBStatement.
 
 **Return Values**
 
-Returns a string containing the error message and SQLCODE value for the last
-error that occurred issuing an SQL statement.
+Returns a string containing the SQLCODE and error message or an empty string if there was no error.
 
 
 ### ibm_db.table_privileges ###
-`resource ibm_db.table_privileges ( IBM_DBConnection connection [, string qualifier [, string schema [, string table_name]]] )`
+`IBM_DBStatement ibm_db.table_privileges ( IBM_DBConnection connection [, string qualifier [, string schema [, string table_name]]] )`
 
 **Description**
 
 Returns a result set listing the tables and associated privileges in a database.
 
 **Parameters**
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema which contains the tables. This parameter accepts a search pattern containing _and % as wildcards.
 * table_name - The name of the table. This parameter accepts a search pattern containing_ and % as wildcards.
 
 **Return Values**
 
-Returns a statement resource with a result set containing following columns:
+Returns an IBM_DBStatement with a result set containing following columns:
 * TABLE_CAT - The catalog that contains the table. The value is `None` if this table does not have catalogs.
 * TABLE_SCHEM - Name of the schema that contains the table.
 * TABLE_NAME - Name of the table.
@@ -1476,7 +1318,7 @@ Returns a statement resource with a result set containing following columns:
 
 
 ### ibm_db.tables ###
-`resource ibm_db.tables ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string table-type]]]] )`
+`IBM_DBStatement ibm_db.tables ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string table-type]]]] )`
 
 **Description**
 
@@ -1484,7 +1326,7 @@ Returns a result set listing the tables and associated metadata in a database
 
 **Parameters**
 
-* connection - A valid database connection resource as returned from ibm_db.connect() or ibm_db.pconnect()
+* connection - A valid IBM_DBConnection
 * qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
 * schema - The schema which contains the tables. This parameter accepts a search pattern containing _and % as wildcards.
 * table-name - The name of the table. This parameter accepts a search pattern containing_ and % as wildcards.
@@ -1502,7 +1344,7 @@ Returns a result set listing the tables and associated metadata in a database
 
 **Return Values**
 
-Returns a statement resource with a result set containing the following columns:
+Returns an IBM_DBStatement with a result set containing the following columns:
 * TABLE_CAT - The catalog that contains the table. The value is `None` if this table does not have catalogs.
 * TABLE_SCHEMA - Name of the schema that contains the table.
 * TABLE_NAME - Name of the table.
