@@ -1075,84 +1075,45 @@ Returns `True` on success or `False` on failure.
 
 **Description**
 
-This function returns a read-only object with information about the IBM DB2 or Informix server.
-The following table lists the database server properties:
-Table 1. Database server properties
-Property name - Description (Return type)
-DBMS_NAME - The name of the database server to which you are connected. For
-DB2 servers this is a combination of DB2 followed by the operating system on
-which the database server is running. (string)
-DBMS_VER - The version of the database server, in the form of a string
-"MM.mm.uuuu" where MM is the major version, mm is the minor version, and
-uuuu is the update. For example, "08.02.0001" represents major version 8,
-minor version 2, update 1. (string)
-DB_CODEPAGE - The code page of the database to which you are connected. (int)
-DB_NAME - The name of the database to which you are connected. (string)
-DFT_ISOLATION - The default transaction isolation level supported by the
-server: (string)
-UR - Uncommitted read: changes are immediately
-
-visible by all concurrent transactions.
-CS - Cursor stability: a row read by one transaction
-
-can be altered and committed by a second concurrent transaction.
-RS - Read stability: a transaction can add or remove
-
-rows matching a search condition or a pending transaction.
-RR - Repeatable read: data affected by pending
-
-transaction is not available to other transactions.
-NC - No commit: any changes are visible at the end of
-
-a successful operation. Explicit commits and rollbacks are not allowed.
-IDENTIFIER_QUOTE_CHAR - The character used to delimit an identifier. (string)
-INST_NAME - The instance on the database server that contains the database.
-(string)
-ISOLATION_OPTION - An array of the isolation options supported by the
-database server. The isolation options are described in the DFT_ISOLATION
-property. (array)
-KEYWORDS - An array of the keywords reserved by the database server. (array)
-LIKE_ESCAPE_CLAUSE - `True` if the database server supports the use of % and _wildcard characters. `False` if the database server does not support these
-wildcard characters. (bool)
-MAX_COL_NAME_LEN - Maximum length of a column name supported by the database
-server, expressed in bytes. (int)
-MAX_IDENTIFIER_LEN - Maximum length of an SQL identifier supported by the
-database server, expressed in characters. (int)
-MAX_INDEX_SIZE - Maximum size of columns combined in an index supported by
-the database server, expressed in bytes. (int)
-MAX_PROC_NAME_LEN - Maximum length of a procedure name supported by the
-database server, expressed in bytes. (int)
-MAX_ROW_SIZE - Maximum length of a row in a base table supported by the
-database server, expressed in bytes. (int)
-MAX_SCHEMA_NAME_LEN - Maximum length of a schema name supported by the
-database server, expressed in bytes. (int)
-MAX_STATEMENT_LEN - Maximum length of an SQL statement supported by the
-database server, expressed in bytes. (int)
-MAX_TABLE_NAME_LEN - Maximum length of a table name supported by the
-database server, expressed in bytes. (bool)
-NON_NULLABLE_COLUMNS - `True` if the database server supports columns that can
-be defined as NOT `None`, `False` if the database server does not support columns
-defined as NOT `None`. (bool)
-PROCEDURES - `True` if the database server supports the use of the CALL
-statement to call stored procedures, `False` if the database server does not
-support the CALL statement. (bool)
-SPECIAL_CHARS - A string containing all of the characters other than a-Z,
-0-9, and underscore that can be used in an identifier name. (string)
-SQL_CONFORMANCE - The level of conformance to the ANSI/ISO SQL-92
-specification offered by the database server: (string)
-ENTRY - Entry-level SQL-92 compliance.
-FIPS127 - FIPS-127-2 transitional compliance.
-FULL - Full level SQL-92 compliance.
-INTERMEDIATE - Intermediate level SQL-92
-compliance.
+Returns a read-only object with information about the IBM DB2 or Informix server.
 
 **Parameters**
-
 * connection - A valid IBM_DBConnection
 
 **Return Values**
-
-Returns an object on a successful call. Returns `False` on failure.
+* On success, an object with the following fields:
+    * DBMS_NAME - The name of the database server to which you are connected. For DB2 servers this is a combination of DB2 followed by the operating system on which the database server is running. (string)
+    * DBMS_VER - The version of the database server, in the form of a string "MM.mm.uuuu" where MM is the major version, mm is the minor version, and uuuu is the update. For example, "08.02.0001" represents major version 8, minor version 2, update 1. (string)
+    * DB_CODEPAGE - The code page of the database to which you are connected. (int)
+    * DB_NAME - The name of the database to which you are connected. (string)
+    * DFT_ISOLATION - The default transaction isolation level supported by the server: (string)
+        * UR - Uncommitted read: changes are immediately visible by all concurrent transactions.
+        * CS - Cursor stability: a row read by one transaction can be altered and committed by a second concurrent transaction.
+        * RS - Read stability: a transaction can add or remove rows matching a search condition or a pending transaction.
+        * RR - Repeatable read: data affected by pending transaction is not available to other transactions.
+        * NC - No commit: any changes are visible at the end of a successful operation. Explicit commits and rollbacks are not allowed.
+    * IDENTIFIER_QUOTE_CHAR - The character used to delimit an identifier. (string)
+    * INST_NAME - The instance on the database server that contains the database. (string)
+    * ISOLATION_OPTION - An array of the isolation options supported by the database server. The isolation options are described in the DFT_ISOLATION property. (array)
+    * KEYWORDS - An array of the keywords reserved by the database server. (array)
+    * LIKE_ESCAPE_CLAUSE - `True` if the database server supports the use of % and _wildcard characters. `False` if the database server does not support these wildcard characters. (bool)
+    * MAX_COL_NAME_LEN - Maximum length of a column name supported by the database server, expressed in bytes. (int)
+    * MAX_IDENTIFIER_LEN - Maximum length of an SQL identifier supported by the database server, expressed in characters. (int)
+    * MAX_INDEX_SIZE - Maximum size of columns combined in an index supported by the database server, expressed in bytes. (int)
+    * MAX_PROC_NAME_LEN - Maximum length of a procedure name supported by the database server, expressed in bytes. (int)
+    * MAX_ROW_SIZE - Maximum length of a row in a base table supported by the database server, expressed in bytes. (int)
+    * MAX_SCHEMA_NAME_LEN - Maximum length of a schema name supported by the database server, expressed in bytes. (int)
+    * MAX_STATEMENT_LEN - Maximum length of an SQL statement supported by the database server, expressed in bytes. (int)
+    * MAX_TABLE_NAME_LEN - Maximum length of a table name supported by the database server, expressed in bytes. (bool)
+    * NON_NULLABLE_COLUMNS - `True` if the database server supports columns that can be defined as NOT NULL, `False` if the database server does not support columns defined as NOT NULL. (bool)
+    * PROCEDURES - `True` if the database server supports the use of the CALL statement to call stored procedures, `False` if the database server does not support the CALL statement. (bool)
+    * SPECIAL_CHARS - A string containing all of the characters other than A-Z, 0-9, and underscore that can be used in an identifier name. (string)
+    * SQL_CONFORMANCE - The level of conformance to the ANSI/ISO SQL-92 specification offered by the database server: (string)
+        * ENTRY - Entry-level SQL-92 compliance.
+        * FIPS127 - FIPS-127-2 transitional compliance.
+        * FULL - Full level SQL-92 compliance.
+        * INTERMEDIATE - Intermediate level SQL-92 compliance.
+* On failure, `False`
 
 
 ### ibm_db.set_option ###
