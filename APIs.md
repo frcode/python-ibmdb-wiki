@@ -103,7 +103,7 @@ Returns and sets the AUTOCOMMIT behavior of the specified IBM_DBConnection.
 Binds a Python variable to an SQL statement parameter in an IBM_DBStatement returned by ibm_db.prepare().
 This function gives you more control over the parameter type, data type,
 precision, and scale for the parameter than simply passing the variable as
-part of the optional input array to ibm_db.execute().
+part of the optional input tuple to ibm_db.execute().
 
 **Parameters**
 * stmt - A prepared statement returned from ibm_db.prepare()
@@ -874,14 +874,14 @@ instead of attempting a new connection.
 For more information on parameters and return values, see [ibm_db.connect](#ibm_dbconnect).
 
 ### ibm_db.prepare ###
-`IBMDB_Statement ibm_db.prepare ( IBM_DBConnection connection, string statement [, array options] )`
+`IBMDB_Statement ibm_db.prepare ( IBM_DBConnection connection, string statement [, dict options] )`
 
 **Description**
 
 Creates a prepared SQL statement which can include 0 or more parameter markers
 (? characters) representing parameters for input,output, or input/output.
 You can pass parameters to the prepared statement using ibm_db.bind_param(),
-or for input values only, as an array passed to ibm_db.execute().
+or for input values only, as a tuple passed to ibm_db.execute().
 
 There are two main advantages to using prepared statements in your application:
 * Performance: when you prepare a statement, the database server
@@ -1094,8 +1094,8 @@ Returns a read-only object with information about the IBM DB2 or Informix server
         * NC - No commit: any changes are visible at the end of a successful operation. Explicit commits and rollbacks are not allowed.
     * IDENTIFIER_QUOTE_CHAR - The character used to delimit an identifier. (string)
     * INST_NAME - The instance on the database server that contains the database. (string)
-    * ISOLATION_OPTION - An array of the isolation options supported by the database server. The isolation options are described in the DFT_ISOLATION property. (array)
-    * KEYWORDS - An array of the keywords reserved by the database server. (array)
+    * ISOLATION_OPTION - A tuple of the isolation options supported by the database server. The isolation options are described in the DFT_ISOLATION property. (tuple)
+    * KEYWORDS - A tuple of the keywords reserved by the database server. (tuple)
     * LIKE_ESCAPE_CLAUSE - `True` if the database server supports the use of % and _wildcard characters. `False` if the database server does not support these wildcard characters. (bool)
     * MAX_COL_NAME_LEN - Maximum length of a column name supported by the database server, expressed in bytes. (int)
     * MAX_IDENTIFIER_LEN - Maximum length of an SQL identifier supported by the database server, expressed in characters. (int)
@@ -1117,7 +1117,7 @@ Returns a read-only object with information about the IBM DB2 or Informix server
 
 
 ### ibm_db.set_option ###
-`bool ibm_db.set_option ( mixed resc, array options, int type )`
+`bool ibm_db.set_option ( mixed resc, dict options, int type )`
 
 **Description**
 
