@@ -144,7 +144,9 @@ Samples for the API usage can be referred from test_146_CallSPINAndOUTParams.py,
 
 
 **Return Values**
-* On success, a tuple containing an IBM_DBStatement object followed by the parameters passed to the procedure, if any. 
+* On success, 
+    * A tuple containing an IBM_DBStatement object followed by the parameters passed to the procedure, if any. 
+    * Or an IBM_DBStatement object if there are no parameters passed to procedure
 * On failure, the value `None`
 
 
