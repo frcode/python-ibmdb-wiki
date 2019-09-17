@@ -504,6 +504,20 @@ Use this function for bulk insert/update/delete operations. It uses ArrayInputCh
 * On success, returns the number of inserted/updated/deleted rows
 * On failure, returns `None`. Use ibm_db.num_rows() to find out the inserted/updated/deleted row count.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+ibm_db.exec_immediate(conn,"CREATE table tabmany( id SMALLINT , name VARCHAR(32))")
+insert = "insert into tabmany values(?,?)"
+values=(1,'sample')
+params=tuple(tuple (x+i if type(x)==int else x+str(i) for x in values) for i in range(3))
+stmt_insert = ibm_db.prepare(conn, insert)
+ibm_db.execute_many(stmt_insert,params)
+row_count = ibm_db.num_rows(stmt_insert)
+print("inserted {} rows".format(row_count))
+```
 
 ### ibm_db.fetch_tuple ###
 `tuple ibm_db.fetch_tuple ( IBM_DBStatement stmt [, int row_number] )`
