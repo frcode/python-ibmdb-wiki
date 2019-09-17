@@ -189,6 +189,21 @@ Samples for the API usage can be referred from test_146_CallSPINAndOUTParams.py,
     * Or an IBM_DBStatement object if there are no parameters passed to procedure
 * On failure, the value `None`
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql="""create or replace procedure proc(OUT out1 integer) dynamic result sets 1 begin  select id into out1 from tabmany where id=1; end"""
+ibm_db.exec_immediate(conn, sql)
+out1 = 0
+stmt, out1=ibm_db.callproc(conn,'proc',(out1,))
+print(out1)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-callproc.py),
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_148_CallSPDiffBindPattern_01.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_146_CallSPINAndOUTParams.py)
 
 ### ibm_db.client_info ###
 `object ibm_db.client_info ( IBM_DBConnection connection )`
