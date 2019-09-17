@@ -72,6 +72,16 @@ Checks if the specified IBM_DBConnection is active.
 * `True` - the resource is active
 * `False` - the resource is not active
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+connState = ibm_db.active(conn)
+print(connState)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-active.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_116_ConnActive.py)
 
 ### ibm_db.autocommit ###
 `mixed ibm_db.autocommit ( IBM_DBConnection connection [, bool value] )`
@@ -517,12 +527,10 @@ stmt_insert = ibm_db.prepare(conn, insert)
 ibm_db.execute_many(stmt_insert,params)
 row_count = ibm_db.num_rows(stmt_insert)
 print("inserted {} rows".format(row_count))
-
-Other examples: 
-http://htmlpreview.github.io/?https://github.com/IBM/db2-python/blob/master/HTML_Documentation/ibm_db-execute_many.html
-https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_execute_many.py
-
 ```
+Other examples:
+[Example1](http://htmlpreview.github.io/?https://github.com/IBM/db2-python/blob/master/HTML_Documentation/ibm_db-execute_many.html)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_execute_many.py)
 
 ### ibm_db.fetch_tuple ###
 `tuple ibm_db.fetch_tuple ( IBM_DBStatement stmt [, int row_number] )`
