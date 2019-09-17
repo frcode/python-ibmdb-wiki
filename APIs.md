@@ -517,6 +517,11 @@ stmt_insert = ibm_db.prepare(conn, insert)
 ibm_db.execute_many(stmt_insert,params)
 row_count = ibm_db.num_rows(stmt_insert)
 print("inserted {} rows".format(row_count))
+
+Other examples: 
+http://htmlpreview.github.io/?https://github.com/IBM/db2-python/blob/master/HTML_Documentation/ibm_db-execute_many.html
+https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_execute_many.py
+
 ```
 
 ### ibm_db.fetch_tuple ###
