@@ -147,6 +147,25 @@ part of the optional input tuple to ibm_db.execute().
 * `True` - the bind succeeded
 * `None` - the bind failed
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+stmt=ibm_db.prepare(conn, "select * from tabmany where id=?")
+id=1
+ibm_db.bind_param(stmt, 1,id)
+ibm_db.execute(stmt)
+row=ibm_db.fetch_tuple(stmt)
+print(row)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-bind_param.py),
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_140_BindParamSelectStmt.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_141_BindParamSelectStmtMultipleParams_01.py),
+[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_142_BindParamSelectStmtMultipleParams_02.py),
+[Example5](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_144_BindParamInsertStmtPARAM_FILE.py),
+[Example6](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_145_BindRetrieveNoneEmptyString.py)
+
 ### ibm_db.callproc ###
 `( IBM_DBStatement [, ...] ) ibm_db.callproc( IBM_DBConnection connection, string procname [, parameters] )`
 
