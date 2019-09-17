@@ -104,6 +104,17 @@ Returns and sets the AUTOCOMMIT behavior of the specified IBM_DBConnection.
     * `True` - AUTOCOMMIT was set to `value` successfully
     * `False` - AUTOCOMMIT was not set to `value` successfully
 
+**Example**
+```python
+import ibm_db
+options = { ibm_db.SQL_ATTR_AUTOCOMMIT:  ibm_db.SQL_AUTOCOMMIT_ON }
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','', options)
+autocommitstatus = ibm_db.autocommit(conn)
+print(autocommitstatus)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-autocommit.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_051_SetAutocommit_01.py)
 
 ### ibm_db.bind_param ###
 `bool ibm_db.bind_param (IBM_DBStatement stmt, int parameter-number, string variable [, int parameter-type [, int data-type [, int precision [, int scale [, int size]]]]] )`
