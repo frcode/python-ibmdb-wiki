@@ -230,6 +230,24 @@ Returns a read-only object with information about the database client.
     * ODBC_VER - The version of ODBC that the ODBC driver manager supports. This returns a string "MM.mm.rrrr" where MM is the major version, mm is the minor version, and rrrr is the release. The client always returns "03.01.0000"
 * On failure, `False`
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+clientinfo = ibm_db.client_info(conn)
+if client:
+    print("DRIVER_NAME: string(%d) \"%s\"" % (len(client.DRIVER_NAME), client.DRIVER_NAME))
+    print("DRIVER_VER: string(%d) \"%s\"" % (len(client.DRIVER_VER), client.DRIVER_VER))
+    print("DATA_SOURCE_NAME: string(%d) \"%s\"" % (len(client.DATA_SOURCE_NAME), client.DATA_SOURCE_NAME))
+    print("DRIVER_ODBC_VER: string(%d) \"%s\"" % (len(client.DRIVER_ODBC_VER), client.DRIVER_ODBC_VER))
+    print("ODBC_VER: string(%d) \"%s\"" % (len(client.ODBC_VER), client.ODBC_VER))
+    print("ODBC_SQL_CONFORMANCE: string(%d) \"%s\"" % (len(client.ODBC_SQL_CONFORMANCE), client.ODBC_SQL_CONFORMANCE))
+    print("APPL_CODEPAGE: int(%s)" % client.APPL_CODEPAGE)
+    print("CONN_CODEPAGE: int(%s)" % client.CONN_CODEPAGE)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-client_info.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_310_ClientInfo.py)
 
 ### ibm_db.close ###
 `bool ibm_db.close ( IBM_DBConnection connection )`
