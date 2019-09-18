@@ -406,6 +406,29 @@ connection will be committed. For this reason, persistent connections are not re
 
 Returns `True` on success or `False` on failure.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+#set autocommit off
+rc = ibm_db.autocommit(conn, ibm_db.SQL_AUTOCOMMIT_OFF)
+#insert a row 
+stmt = ibm_db.exec_immediate(conn, "insert into tabmany values(2, 'commit test')")
+#commit the transaction explicitly as autocommit is off
+rc = ibm_db.commit(conn)
+#validate that row is inserted
+sql_stmt = ibm_db.exec_immediate(conn, "select * from tabmany")
+row = ibm_db.fetch_tuple(sql_stmt)
+if row:
+    print(str(row[0]) + "\n" + row[1])
+
+#close the connection
+ibm_db.close(conn)
+```
+Other Examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-commit.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_021_CommitDelete.py)
 
 ### ibm_db.conn_error ###
 `string ibm_db.conn_error ( [IBM_DBConnection connection] )`
