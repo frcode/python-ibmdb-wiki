@@ -536,6 +536,7 @@ where the parameters represent the following values:
     * `SQL_ATTR_INFO_WRKSTNNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_WRKSTNNAME attribute is used to set the client workstation name that is sent to a database.  The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_WRKSTNNAME attribute.
     * `SQL_ATTR_INFO_ACCTSTR` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_ACCTSTR attribute is used to set the client accounting string that is sent to a database. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_ACCTSTR attribute.
     * `SQL_ATTR_INFO_APPLNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_APPLNAME attribute is used to set the client application name that is sent to a database. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_APPLNAME attribute.
+
 For more information on these keywords, please refer [IBM data server driver configuration keywords](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.swg.im.dbclient.config.doc/doc/c0054698.html).
 
 * replace_quoted_literal - Indicates if the CLI Connection attribute SQL_ATTR_REPLACE_QUOTED_LITERAL is to be set or not
@@ -603,6 +604,14 @@ Creates a database by using the specified database name, code set and mode
 
 Returns `True` on successful creation of database else return `None`.
 
+**Example**
+```python
+import ibm_db
+conn_str_attach = "attach=true;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password"
+database='test123'
+conn_attach = ibm_db.connect(conn_str_attach, '', '')
+rc = ibm_db.createdb(conn_attach, database)
+```
 
 ### ibm_db.createdbNX ###
 `bool ibm_db.createdbNX ( IBM_DBConnection connection, string dbName [, codeSet, mode] )`
