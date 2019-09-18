@@ -663,6 +663,21 @@ if you are working with a forward-only cursor or scrollable cursor.
 
 One of the following values: `SQL_CURSOR_FORWARD_ONLY`, `SQL_CURSOR_KEYSET_DRIVEN`, `SQL_CURSOR_DYNAMIC`, or `SQL_CURSOR_STATIC`
 
+**Example**
+```python
+import ibm_db
+conn = ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+stmtOption = {ibm_db.SQL_ATTR_CURSOR_TYPE: ibm_db.SQL_CURSOR_FORWARD_ONLY}
+sqlStatement = "SELECT * FROM tabmany"
+resultSet = ibm_db.exec_immediate(conn, sqlStatement, stmtOption)
+
+#get the cursor type
+cursorType = ibm_db.cursor_type(resultSet)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Jupyter_Notebooks/ibm_db-cursor_type.ipynb)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_cursortype.py)
 
 ### ibm_db.dropdb ###
 `bool ibm_db.dropdb ( IBM_DBConnection connection, string dbName )`
