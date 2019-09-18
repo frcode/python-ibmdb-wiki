@@ -513,7 +513,7 @@ where the parameters represent the following values:
     * password - The password with which you are connecting to the database.
 * user - The username with which you are connecting to the database. For uncataloged connections, you must pass an empty string.
 * password - The password with which you are connecting to the database. For uncataloged connections, you must pass an empty string.
-* options - A dict of connection options that affect the behavior of the connection:
+* **options** - A dict of connection options that affect the behavior of the connection:
     * `SQL_ATTR_AUTOCOMMIT`
         * `SQL_AUTOCOMMIT_ON` - AUTOCOMMIT is on
         * `SQL_AUTOCOMMIT_OFF` - AUTOCOMMIT is off
@@ -528,11 +528,16 @@ where the parameters represent the following values:
         * `SQL_CURSOR_DYNAMIC` - uses a dynamic cursor
         * `SQL_CURSOR_STATIC` - uses a static cursor
     * `SQL_ATTR_INFO_PROGRAMNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_setgetOption.py)) - A null-terminated user-defined character string, up to 20 bytes in length, used to specify the name of the application running on the client.
-    * `SQL_ATTR_USE_TRUSTED_CONTEXT` - When connecting to a Db2 database server that supports trusted contexts, set this attribute if you want the connection you are creating to be a trusted connection.
+    * `SQL_ATTR_USE_TRUSTED_CONTEXT` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_trusted_context_connect.py)) - When connecting to a Db2 database server that supports trusted contexts, set this attribute if you want the connection you are creating to be a trusted connection.
+    * `SQL_ATTR_TRUSTED_CONTEXT_USERID` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_trusted_context_connect.py)) - A user defined string containing a user ID. Use this on existing trusted connections to switch users. Do not use it when creating a trusted connection.
+    * `SQL_ATTR_TRUSTED_CONTEXT_PASSWORD` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_trusted_context_connect.py)) - A user defined string containing a password. Use this attribute if the database server requires a password when switching users on a trusted connection. Set this attribute after setting the attribute SQL_ATTR_TRUSTED_CONTEXT_USERID and before executing any SQL statements that access the database server.
     * `SQL_ATTR_CURRENT_SCHEMA` - A null-terminated character string containing the name of the schema to be used by CLI for the SQLColumns() call if the szSchemaName pointer is set to null. Refer to [ibm_db.columns](#ibm_dbcolumns) for example.
     * `SQL_ATTR_INFO_USERID ` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_USERID attribute is used to set the client user ID (accounting user ID) that is sent to a database. The SQL_ATTR_INFO_USERID attribute is for identification purposes only and is not used for any authentication. Do not confuse the SQL_ATTR_INFO_USERID attribute with the authentication user ID. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_USERID attribute.
     * `SQL_ATTR_INFO_WRKSTNNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_WRKSTNNAME attribute is used to set the client workstation name that is sent to a database.  The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_WRKSTNNAME attribute.
-    * `SQL_ATTR_INFO_ACCTSTR` 
+    * `SQL_ATTR_INFO_ACCTSTR` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_ACCTSTR attribute is used to set the client accounting string that is sent to a database. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_ACCTSTR attribute.
+    * `SQL_ATTR_INFO_APPLNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_APPLNAME attribute is used to set the client application name that is sent to a database. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_APPLNAME attribute.
+For more information on these keywords, please refer [IBM data server driver configuration keywords](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.swg.im.dbclient.config.doc/doc/c0054698.html).
+
 * replace_quoted_literal - Indicates if the CLI Connection attribute SQL_ATTR_REPLACE_QUOTED_LITERAL is to be set or not
     * `QUOTED_LITERAL_REPLACEMENT_ON` - Sets the attribute on (default)
     * `QUOTED_LITERAL_REPLACEMENT_OFF` - Sets the attribute off
