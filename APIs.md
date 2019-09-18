@@ -266,6 +266,19 @@ ibm_db.pconnect(), the connection is returned to the pool for the next caller of
 
 Returns `True` on success or `False` on failure.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+rc = ibm_db.close(conn)
+print(rc)
+```
+Other Examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-close.py),
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_070_Close.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_071_CloseSuccess.py)
+
 
 ### ibm_db.column_privileges ###
 `IBM_DBStatement ibm_db.column_privileges ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string column-name]]]] )`
@@ -293,6 +306,30 @@ An IBM_DBStatement with a result set containing rows with the following columns:
 * PRIVILEGE - The privilege for the column.
 * IS_GRANTABLE - Whether the GRANTEE is permitted to grant this privilege to other users.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+# ANIMAL is the table name
+stmt = ibm_db.column_privileges(conn, None, None, 'ANIMALS')
+row = ibm_db.fetch_tuple(stmt)
+if row:
+    print(row[0])
+    print(row[1])
+    print(row[2])
+    print(row[3])
+    print(row[4])
+    print(row[5])
+    print(row[6])
+    print(row[7])
+
+ibm_db.close(conn)
+```
+
+**Example**
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-column_privileges.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_023_ColumnPrivileges.py)
 
 ### ibm_db.columns ###
 `IBM_DBStatement ibm_db.columns ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string column-name]]]] )`
