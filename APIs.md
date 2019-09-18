@@ -517,20 +517,29 @@ where the parameters represent the following values:
     * `SQL_ATTR_AUTOCOMMIT`
         * `SQL_AUTOCOMMIT_ON` - AUTOCOMMIT is on
         * `SQL_AUTOCOMMIT_OFF` - AUTOCOMMIT is off
+       Refer [ibm_db.autocommit](#ibm_dbautocommit) for example.
     * `ATTR_CASE`
         * `CASE_NATURAL` - column names are returned in natural case.
         * `CASE_LOWER` - column names are returned in lower case.
         * `CASE_UPPER` - column names are returned in upper case.
+       [Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_008_ColumnInfo.py).
     * `SQL_ATTR_CURSOR_TYPE`
         * `SQL_CURSOR_FORWARD_ONLY` - uses a forward-only cursor is created, which is the default and is supported on all database servers.
         * `SQL_CURSOR_KEYSET_DRIVEN` - uses a keyset-driven cursor, which is scrollable and allows random access in the result set but is currently only supported by IBM DB2 Universal Database.
         * `SQL_CURSOR_DYNAMIC` - uses a dynamic cursor
         * `SQL_CURSOR_STATIC` - uses a static cursor
+       [Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_cursortype.py).
+    * `SQL_ATTR_INFO_PROGRAMNAME` - A null-terminated user-defined character string, up to 20 bytes in length, used to specify the name of the application running on the client.
+       [Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_setgetOption.py).
+    * `SQL_ATTR_USE_TRUSTED_CONTEXT` - When connecting to a Db2 database server that supports trusted contexts, set this attribute if you want the connection you are creating to be a trusted connection.
+    * `SQL_ATTR_CURRENT_SCHEMA` - A null-terminated character string containing the name of the schema to be used by CLI for the SQLColumns() call if the szSchemaName pointer is set to null. Refer to [ibm_db.columns](#ibm_dbcolumns) for example.
+    * `SQL_ATTR_INFO_USERID ` - The SQL_ATTR_INFO_USERID attribute is used to set the client user ID (accounting user ID) that is sent to a database. The SQL_ATTR_INFO_USERID attribute is for identification purposes only and is not used for any authentication. Do not confuse the SQL_ATTR_INFO_USERID attribute with the authentication user ID.
+[Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py).
+    * `
 * replace_quoted_literal - Indicates if the CLI Connection attribute SQL_ATTR_REPLACE_QUOTED_LITERAL is to be set or not
     * `QUOTED_LITERAL_REPLACEMENT_ON` - Sets the attribute on (default)
     * `QUOTED_LITERAL_REPLACEMENT_OFF` - Sets the attribute off
-    * `SQL_ATTR_INFO_PROGRAMNAME` - A null-terminated user-defined character string, up to 20 bytes in length, used to specify the name of the application running on the client.
-    * `SQL_ATTR_USE_TRUSTED_CONTEXT` - When connecting to a Db2 database server that supports trusted contexts, set this attribute if you want the connection you are creating to be a trusted connection.
+    
 
 **Return Values**
 * On success, an IBM_DBConnection connection object
@@ -543,7 +552,9 @@ import ibm_db
 conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
 
 #use options
-options=
+options = { ibm_db.SQL_ATTR_INFO_PROGRAMNAME : 'TestProgram', ibm_db.SQL_ATTR_CURRENT_SCHEMA : 'MYSCHEMA' }
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','', options)
+
 Note: Local cataloged database implicit connection
 i) If database parameter specified is a local database alias name with blank userid and password
 then connect/pconnect API will use current logged in user's userid for implicit connection
