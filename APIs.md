@@ -368,6 +368,24 @@ An IBM_DBStatement with a result set containing rows containing the following co
 * ORDINAL_POSITION - The 1-indexed position of the column in the table.
 * IS_NULLABLE - A string value where 'YES' means that the column is nullable and 'NO' means that the column is not nullable.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+# TABMANY is table name
+result = ibm_db.columns(conn,None,None,"TABMANY")
+row = ibm_db.fetch_both(result)
+if row:
+    table_name=row['TABLE_NAME']
+    column_name=row['COLUMN_NAME']
+print("Table name               : {}" .format(table_name))
+print("column name              : {}" .format(column_name))
+```
+
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-columns.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_008_ColumnInfo.py)
 
 ### ibm_db.commit ###
 `bool ibm_db.commit ( IBM_DBConnection connection )`
