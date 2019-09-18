@@ -447,6 +447,20 @@ last operation using a IBM_DBConnection failed.
 
 Returns a string containing the SQLSTATE value or an empty string if there was no error.
 
+**Example**
+```python
+import ibm_db
+#try connecting with an invalid user name
+try:
+    conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=invalidusername;PWD=password",'','')
+except:
+    print("Error in connection, sqlstate = ")
+    errorState = ibm_db.conn_error()
+    print(errorState)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-conn_error.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_081_ConnWrongUser.py)
 
 ### ibm_db.conn_errormsg ###
 `string ibm_db.conn_errormsg ( [IBM_DBConnection connection] )`
