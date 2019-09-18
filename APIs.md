@@ -635,6 +635,17 @@ Creates the database if it does not exist by using the specified database name, 
 
 Returns `True` if database already exists or created successfully else return `None`
 
+**Example**
+```python
+import ibm_db
+conn_str_attach = "attach=true;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password"
+database='test123'
+conn_attach = ibm_db.connect(conn_str_attach, '', '')
+rc = ibm_db.createdbNX(conn_attach, database)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Jupyter_Notebooks/ibm_db-createdbNX.ipynb)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_createdbNX.py)
 
 ### ibm_db.cursor_type ###
 `int ibm_db.cursor_type ( IBM_DBStatement stmt )`
