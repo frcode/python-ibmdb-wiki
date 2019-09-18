@@ -529,20 +529,47 @@ where the parameters represent the following values:
 * replace_quoted_literal - Indicates if the CLI Connection attribute SQL_ATTR_REPLACE_QUOTED_LITERAL is to be set or not
     * `QUOTED_LITERAL_REPLACEMENT_ON` - Sets the attribute on (default)
     * `QUOTED_LITERAL_REPLACEMENT_OFF` - Sets the attribute off
+    * `SQL_ATTR_INFO_PROGRAMNAME` - A null-terminated user-defined character string, up to 20 bytes in length, used to specify the name of the application running on the client.
+    * `SQL_ATTR_USE_TRUSTED_CONTEXT` - When connecting to a Db2 database server that supports trusted contexts, set this attribute if you want the connection you are creating to be a trusted connection.
 
 **Return Values**
 * On success, an IBM_DBConnection connection object
 * On failure, `None`
 
-```xml
+**Example**
+```python
+import ibm_db
+#use connection string
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
 
+#use options
+options=
 Note: Local cataloged database implicit connection
 i) If database parameter specified is a local database alias name with blank userid and password
 then connect/pconnect API will use current logged in user's userid for implicit connection
-eg: conn = ibm_db.connect('sample', '', '')
+eg: **conn = ibm_db.connect('sample', '', '')**
+
 ii) If database parameter is a connection string with value "DSN=database_name" then
 connect/pconnect API will use current logged in user's userid for implicit connection
-eg: conn = ibm_db.connect('DSN=sample', '', '')
+eg: **conn = ibm_db.connect('DSN=sampledb', '', '')**
+If you are using DSN in connection string as in above example, then you must specify other necessary connection details like hostname, userid, password via supported keywords in db2dsdriver.cfg configuration file located under site-packages/clidriver/cfg or under the cfg folder as per the path you have set IBM_DB_HOME to. You can refer to the sample file below.
+For more information, please refer [IBM data server driver configuration keywords](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.swg.im.dbclient.config.doc/doc/c0054698.html).
+```
+
+**Sample configuration in db2dsdriver.cfg:**
+```xml
+<configuration>
+   <dsncollection>
+      <dsn alias="sampledb" name="sample" host="x.y.z.com" port="50000">
+      </dsn>
+   </dsncollection>
+   <databases>
+      <database name="sample" host="x.y.z.com" port="50000">
+	  <parameter name="userid" value="username"/>
+	  <parameter name="password" value="xxxxxx"/>
+       </database>
+   </databases>
+</configuration>
 ```
 
 ### ibm_db.createdb ###
