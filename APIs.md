@@ -907,6 +907,27 @@ Returns a dict, indexed by column name, representing a row in a result set.
 * Returns a dict containing all the column values indexed by column name for the selected row or the next row if row number was not specified.
 * Returns `False` if there are no rows left in the result set, or if the row requested by row_number does not exist in the result set.
 
+*Example*
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql = "select id, name from tabmany"
+stmt = ibm_db.prepare(conn, sql,{ibm_db.SQL_ATTR_CURSOR_TYPE: ibm_db.SQL_CURSOR_KEYSET_DRIVEN})
+result = ibm_db.execute(stmt)
+#fetch every alternate row starting from 2nd 
+i = 2
+row = ibm_db.fetch_assoc(stmt, i)
+while ( row ):
+    print("%-5d %-16s " % (row['ID'], row['NAME']))
+    i = i + 2
+    row = ibm_db.fetch_assoc(stmt, i)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-fetch_assoc.py),
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_151_FetchAssocSelect_02.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_153_FetchAssocSelect_04.py),
+[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_158_FetchAssocNestedSelects_02.py)
 
 ### ibm_db.fetch_both ###
 `dict ibm_db.fetch_both ( IBM_DBStatement stmt [, int row_number] )`
