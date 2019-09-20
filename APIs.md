@@ -797,6 +797,9 @@ try:
 except:
     print(ibm_db.stmt_errormsg())
 ```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-execute.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_265_NoAffectedRows.py)
 
 ### ibm_db.execute_many ###
 `mixed ibm_db.execute_many( IBM_DBStatement stmt, tuple seq_of_parameters )`
