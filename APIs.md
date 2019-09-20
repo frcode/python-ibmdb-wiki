@@ -781,6 +781,23 @@ ibm_db.execute() executes an SQL statement that was prepared by ibm_db.prepare()
 
 Returns `True` on success or `False` on failure.
 
+**Example**
+```python
+import ibm_db
+conn = ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql_stmt = "insert into tabmany values(?,?)"
+stmt = ibm_db.prepare(conn, sql_stmt)
+id = 3
+name = "Sam"
+ibm_db.bind_param(stmt, 1, id)
+ibm_db.bind_param(stmt, 2, name)
+try:
+    ibm_db.execute(stmt)
+except:
+    print(ibm_db.stmt_errormsg())
+```
+
 ### ibm_db.execute_many ###
 `mixed ibm_db.execute_many( IBM_DBStatement stmt, tuple seq_of_parameters )`
 
