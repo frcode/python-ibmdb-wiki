@@ -873,7 +873,7 @@ Returns a tuple, indexed by column position, representing a row in a result set.
 * Returns a tuple containing all the column values in the result set for the selected row or the next row if row_number was not specified
 * Returns `False` if there are no rows left in the result set, or if the row requested by row_number does not exist in the result set.
 
-*Example*
+**Example**
 ```python
 import ibm_db
 conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
@@ -907,7 +907,7 @@ Returns a dict, indexed by column name, representing a row in a result set.
 * Returns a dict containing all the column values indexed by column name for the selected row or the next row if row number was not specified.
 * Returns `False` if there are no rows left in the result set, or if the row requested by row_number does not exist in the result set.
 
-*Example*
+**Example**
 ```python
 import ibm_db
 conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
@@ -988,6 +988,22 @@ row.
 Returns `True` if the requested row exists in the result set. Returns `False` if
 the requested row does not exist in the result set.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql = "select id, name from tabmany"
+stmt = ibm_db.prepare(conn, sql,)
+result = ibm_db.execute(stmt)
+row = ibm_db.fetch_row(stmt)
+while ( row ):
+    print(row)
+    row = ibm_db.fetch_row(stmt)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-fetch_row.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_036_FetchRow_02.py)
 
 ### ibm_db.field_display_size ###
 `int ibm_db.field_display_size ( IBM_DBStatement stmt, mixed column )`
