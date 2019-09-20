@@ -820,6 +820,8 @@ Use this function for bulk insert/update/delete operations. It uses ArrayInputCh
 **Example**
 ```python
 import ibm_db
+import ibm_db_dbi as dbi
+import pandas as pd
 conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
 
 ibm_db.exec_immediate(conn,"CREATE table tabmany( id SMALLINT , name VARCHAR(32))")
@@ -830,6 +832,27 @@ stmt_insert = ibm_db.prepare(conn, insert)
 ibm_db.execute_many(stmt_insert,params)
 row_count = ibm_db.num_rows(stmt_insert)
 print("inserted {} rows".format(row_count))
+
+# use data frame, requires ibm_db_dbi connection
+conn1 = ibm_db.connect('DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password')
+
+data={'ID':[11,22,33,44],'NAME':['val1','val2','val3','val4']}
+df1=pd.DataFrame(data)
+tuple_of_tuples = tuple([tuple(x) for x in df1.values])
+sql="insert into testmany values(?,?)"
+
+stmt=ibm_db.prepare(conn,sql)
+ibm_db.execute_many(stmt,tuple_of_tuples)
+
+df2=pd.read_sql("select * from test",conn1) 
+print(df2)
+
+subset = df2[['ID','NAME','RATING']]
+tuple_of_tuples1 = tuple([tuple(x) for x in subset.values])
+ibm_db.execute_many(stmt,tuple_of_tuples1)
+
+df3=pd.read_sql("select * from test", conn1)
+print(df3)
 ```
 Other examples:
 [Example1](http://htmlpreview.github.io/?https://github.com/IBM/db2-python/blob/master/HTML_Documentation/ibm_db-execute_many.html)
@@ -850,6 +873,24 @@ Returns a tuple, indexed by column position, representing a row in a result set.
 * Returns a tuple containing all the column values in the result set for the selected row or the next row if row_number was not specified
 * Returns `False` if there are no rows left in the result set, or if the row requested by row_number does not exist in the result set.
 
+*Example*
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql = "select id, name from tabmany"
+stmt = ibm_db.exec_immediate(conn, sql)
+
+row = ibm_db.fetch_tuple(stmt)
+while ( row ):
+    for i in row:
+         print(i)
+    row = ibm_db.fetch_tuple(stmt)
+ibm_db.close(conn)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-fetch_tuple.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_154_AllFetches.py)
 
 ### ibm_db.fetch_assoc ###
 `dict ibm_db.fetch_assoc ( IBM_DBStatement stmt [, int row_number] )`
