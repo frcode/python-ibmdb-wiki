@@ -1130,6 +1130,26 @@ Returns the precision of the indicated column in a result set.
 
 Returns an integer containing the precision of the specified column or `False` if the column does not exist.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql = "select id, name from tabmany"
+field_precision=[]
+stmt = ibm_db.prepare(conn, sql,)
+result = ibm_db.execute(stmt)
+cols = ibm_db.num_fields(stmt)
+for i in range(0, cols):
+    field_precision.append(ibm_db.field_precision(stmt,i))
+print(field_precision)
+
+row = ibm_db.fetch_tuple(stmt)
+# use the precision to format the data display
+print("{:<{prec}}\t{:>{char_prec}}".format(row[0],row[1],prec=field_precision[0],char_prec=field_precision[1]))
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_precision.py)
 
 ### ibm_db.field_scale ###
 `int ibm_db.field_scale ( IBM_DBStatement stmt, mixed column )`
