@@ -1037,6 +1037,7 @@ for i in range(0, cols):
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_display_size.py)
 [Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_213_FieldDisplaySize_04.py)
+
 ### ibm_db.field_name ###
 `string ibm_db.field_name ( IBM_DBStatement stmt, mixed column )`
 
@@ -1052,6 +1053,24 @@ Returns the name of the specified column in the result set.
 
 Returns a string containing the name of the specified column or `False` if the column does not exist.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql = "select id, name from tabmany"
+field_name=[]
+stmt = ibm_db.prepare(conn, sql,)
+result = ibm_db.execute(stmt)
+cols = ibm_db.num_fields(stmt)
+for i in range(0, cols):
+    field_name.append(ibm_db.field_name(stmt,i))
+print(field_name)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_name.py),
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_231_FieldTypeName.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_240_FieldWidthPosName_01.py)
 
 ### ibm_db.field_num ###
 `int ibm_db.field_num ( IBM_DBStatement stmt, mixed column )`
