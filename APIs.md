@@ -944,6 +944,24 @@ Returns a dict, indexed by column name and position, representing a row in a res
 * Returns a dict containing all the column values indexed by column name and by 0-indexed column number for the selected row or the next row if row number was not specified.
 * Returns `False` if there are no rows left in the result set, or if the row requested by row_number does not exist in the result set.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql = "select id, name from tabmany"
+stmt = ibm_db.prepare(conn, sql,)
+result = ibm_db.execute(stmt)
+row = ibm_db.fetch_both(stmt)
+while ( row ):
+    print("%-5d %-5d " % (row['ID'], row[0]))
+    print("%-16s %-16s " % (row['NAME'], row[1]))
+    row = ibm_db.fetch_both(stmt)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-fetch_both.py),
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_161_FetchBothNestedSelects_01.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_162_FetchBothNestedSelects_02.py)
 
 ### ibm_db.fetch_row ###
 `bool ibm_db.fetch_row ( IBM_DBStatement stmt [, int row_number] )`
