@@ -1166,6 +1166,27 @@ Returns the scale of the indicated column in a result set.
 
 Returns an integer containing the scale of the specified column or `False` if the column does not exist.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+insert = "insert into scale_test values(25280.00, 17600.00)"
+ibm_db.exec_immediate(conn, insert)
+
+sql = "select salary, bonus from scale_test"
+field_scale=[]
+stmt = ibm_db.prepare(conn, sql)
+result = ibm_db.execute(stmt)
+cols = ibm_db.num_fields(stmt)
+for i in range(0, cols):
+    field_scale.append(ibm_db.field_scale(stmt,i))
+print(field_scale)
+row = ibm_db.fetch_tuple(stmt)
+print("{:<{scale1}}\t{:>{scale2}}".format(row[0],row[1],scale1=field_scale[0],scale2=field_scale[1]))
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_scale.py)
 
 ### ibm_db.field_type ###
 `string ibm_db.field_type ( IBM_DBStatement stmt, mixed column )`
