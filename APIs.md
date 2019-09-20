@@ -638,7 +638,7 @@ Returns `True` if database already exists or created successfully else return `N
 **Example**
 ```python
 import ibm_db
-conn_str_attach = "attach=true;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password"
+conn_str_attach = "ATTACH=true;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password"
 database='test123'
 conn_attach = ibm_db.connect(conn_str_attach, '', '')
 rc = ibm_db.createdbNX(conn_attach, database)
@@ -695,6 +695,18 @@ Drops the specified database
 
 Returns `True` if specified database dropped successfully else `None`.
 
+**Example**
+```python
+import ibm_db
+conn = ibm_db.connect("ATTACH=true;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+dbName = "MY_DB"
+rc = ibm_db.dropdb(conn, dbName)
+```
+Othe examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-dropdb_LOCAL.py),
+[Example2](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-dropdb_REMOTE.py),
+[Exampl3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_createDropDB.py)
 
 ### ibm_db.exec_immediate ###
 `stmt_handle ibm_db.exec_immediate( IBM_DBConnection connection, string statement [, dict options] )`
