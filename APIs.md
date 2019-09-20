@@ -706,7 +706,7 @@ rc = ibm_db.dropdb(conn, dbName)
 Othe examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-dropdb_LOCAL.py),
 [Example2](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-dropdb_REMOTE.py),
-[Exampl3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_createDropDB.py)
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_createDropDB.py)
 
 ### ibm_db.exec_immediate ###
 `stmt_handle ibm_db.exec_immediate( IBM_DBConnection connection, string statement [, dict options] )`
@@ -742,6 +742,29 @@ to pass in the input values and avoid SQL injection attacks.
 Returns a stmt_handle resource if the SQL statement was issued
 successfully, or `False` if the database failed to execute the SQL statement.
 
+**Example**
+```python
+import ibm_db
+import pandas
+import ibm_db_dbi as dbi
+conn = ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql_stmt =  "select * from tabmany"
+result = ibm_db.exec_immediate(conn, sql_stmt)
+if stmt is not None:
+    row = ibm_db.fetch_tuple(result)
+    while(row):
+        print("{}\t{}\n".format(row[0],row[1])
+        row = ibm_db.fetch_tuple(result)
+
+# use pandas dataframe
+conn1 = dbi.connect('DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password')
+df = pd.read_sql("select * from tabmany", conn1)
+print(df)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-exec_immediate.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_113_DateTest.py)
 
 ### ibm_db.execute ###
 `bool ibm_db.execute ( IBM_DBStatement stmt [, tuple parameters] )`
