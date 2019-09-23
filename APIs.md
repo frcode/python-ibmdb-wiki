@@ -1332,6 +1332,23 @@ before the end of the script.
 
 Returns `True` on success or `False` on failure.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+result = ibm_db.exec_immediate(conn, "select * from tabmany")
+row = ibm_db.fetch_both(result)
+while row:
+    print(row)
+    row = ibm_db.fetch_both(result)
+	
+ibm_db.free_result(result)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-free_result.py),
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_250_FreeResult_01.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_251_FreeResult_02.py)
 
 ### ibm_db.free_stmt ###
 `bool ibm_db.free_stmt ( IBM_DBStatement stmt )` **(DEPRECATED)**
