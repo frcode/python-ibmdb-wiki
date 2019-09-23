@@ -1250,7 +1250,7 @@ Other examples:
 [Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_240_FieldWidthPosName_01.py)
 
 ### ibm_db.foreign_keys ###
-`IBM_DBStatement ibm_db.foreign_keys ( IBM_DBConnection connection, string qualifier, string schema, string table-name )`
+`IBM_DBStatement ibm_db.foreign_keys ( IBM_DBConnection connection, string pk_qualifier, string pk_schema, string pk_table-name, string fk_qualifier, string fk_schema, string fk_table-name )`
 
 **Description**
 
@@ -1259,9 +1259,12 @@ Returns a result set listing the foreign keys for a table.
 **Parameters**
 
 * connection - A valid IBM_DBConnection
-* qualifier - A qualifier for DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
-* schema - The schema which contains the tables. If schema is `None`, the current schema for the connection is used instead.
-* table-name - The name of the table.
+* pk_qualifier - A qualifier for the pk_table-name argument for the DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
+* pk_schema - The schema for the pk_table-name argument which contains the tables. If schema is `None`, the current schema for the connection is used instead.
+* pk_table-name - The name of the table which contains the primary key.
+* fk_qualifier - A qualifier for the fk_table-name argument for the DB2 databases running on OS/390 or z/OS servers. For other databases, pass `None` or an empty string.
+* fk_schema - The schema for the fk_table-name argument which contains the tables. If schema is `None`, the current schema for the connection is used instead.
+* fk_table-name - The name of the table which contains the foreign key.
 
 **Return Values**
 
@@ -1280,6 +1283,12 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * FK_NAME - The name of the foreign key.
 * PK_NAME - The name of the primary key.
 * DEFERRABILITY - An integer value representing whether the foreign key deferrability is SQL_INITIALLY_DEFERRED, SQL_INITIALLY_IMMEDIATE, or SQL_NOT_DEFERRABLE.
+
+If pk_table-name contains a table name, and fk_table-name is an empty string, the ibm_db.foreign_keys() function returns a result set that contains the primary key of the specified table and all of the foreign keys (in other tables) that refer to it.
+
+If fk_table-name contains a table name, and pk_table-name is an empty string, the ibm_db.foreign_keys() function returns a result set that contains all of the foreign keys in the specified table and the primary keys (in other tables) to which they refer.
+
+If both pk_table-name and fk_table-name contain table names, the ibm_db.foreign_keys() function returns the foreign keys in the table that are specified in fk_table-name, which refer to the primary key of the table that is specified in pk_table-name. There should be one key at the most.
 
 **Example**
 ```python
