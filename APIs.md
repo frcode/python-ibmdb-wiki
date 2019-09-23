@@ -1281,6 +1281,30 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * PK_NAME - The name of the primary key.
 * DEFERRABILITY - An integer value representing whether the foreign key deferrability is SQL_INITIALLY_DEFERRED, SQL_INITIALLY_IMMEDIATE, or SQL_NOT_DEFERRABLE.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+tkey = "create table test_key(name VARCHAR(30) NOT NULL, idf INTEGER NOT NULL)"
+try:
+    result = ibm_db.exec_immediate(conn, tkey)
+except:
+    pass
+	
+fktable = "create table foreign_key(namef VARCHAR(30) NOT NULL, id INTEGER NOT NULL, FOREIGN KEY(namef) REFERENCES test_keys(name))"
+try:
+    result = ibm_db.exec_immediate(conn, fktable)
+except:
+    pass
+
+stmt = ibm_db.foreign_keys(conn, None, None, None, None, None,'FOREIGN_KEY')
+row = ibm_db.fetch_tuple(stmt)
+print(row[7],"is a foreign key in", row[6], "referencing", row[3], "in table", row[2])
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-foreign_keys.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_024_ForeignKeys.py)
 
 ### ibm_db.free_result ###
 `bool ibm_db.free_result ( IBM_DBStatement stmt )`
