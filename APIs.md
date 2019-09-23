@@ -1233,6 +1233,21 @@ the actual width of the column for a variable-length data type.
 
 Returns an integer containing the width of the specified character or binary column; or `False` if the column does not exist.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+result = ibm_db.exec_immediate(conn, "select * from tabmany")
+for i in range(0, ibm_db.num_fields(result) ):
+    col_width = ibm_db.field_width(result, i)
+    col_name = ibm_db.field_name(result,i)
+    #print(col_name,col_width)
+    print("{:<{width}}".format(col_name, width=col_width),end=" ")
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_width.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_240_FieldWidthPosName_01.py)
 
 ### ibm_db.foreign_keys ###
 `IBM_DBStatement ibm_db.foreign_keys ( IBM_DBConnection connection, string qualifier, string schema, string table-name )`
