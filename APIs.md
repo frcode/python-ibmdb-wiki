@@ -1443,6 +1443,83 @@ procedure returned another result set. Returns `False` if the stored procedure
 did not return another result set.
 
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+create_proc = """create procedure multi_results() 
+result sets 3
+language sql
+Begin
+DECLARE c1 CURSOR WITH RETURN FOR 
+select name, id from tabmany;
+
+DECLARE c2 CURSOR WITH RETURN FOR
+select name, id from tabmany where id < 40;
+
+DECLARE c3 CURSOR WITH RETURN FOR
+select name, id from tabmany where id > 40;
+
+OPEN c1;
+OPEN c2;
+OPEN c3;
+END """
+
+try:
+    rc = ibm_db.exec_immediate(conn, create_proc)
+except:
+    pass
+
+# retrieve first result set
+resultSet_1 = None
+try:
+    resultSet_1 = ibm_db.callproc(conn, 'multi_results')
+except:
+    print("stored procedure invocation\n")
+    print(ibm_db.stmt_errormsg())
+    pass
+
+
+if resultSet_1:
+    row = ibm_db.fetch_tuple(resultSet_1)
+    while row:
+        for i in row:
+            print(i)
+        row = ibm_db.fetch_tuple(resultSet_1)
+
+# retrieve second result set
+resultSet_2 = None
+try:
+    resultSet_2 = ibm_db.next_result(resultSet_1)
+except Exception:
+    pass	
+
+if resultSet_2:
+    row = ibm_db.fetch_tuple(resultSet_2)
+    while row:
+        for i in row:
+            print(i)
+        row = ibm_db.fetch_tuple(resultSet_2)
+
+# retrieve third result set		
+resultSet_3 = None
+try:
+    resultSet_3 = ibm_db.next_result(resultSet_1)
+except Exception:
+    pass
+
+if resultSet_3:
+    row = ibm_db.fetch_tuple(resultSet_3)
+    while row:
+        for i in row:
+            print(i)
+        row = ibm_db.fetch_tuple(resultSet_3)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-next_result.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_200_MultipleRsltsetsUniformColDefs.py)
+
 ### ibm_db.num_fields ###
 `int ibm_db.num_fields ( IBM_DBStatement stmt )`
 
@@ -1461,7 +1538,6 @@ otherwise know how to retrieve and use the results.
 Returns an integer value representing the number of fields in the result set
 associated with the specified IBM_DBStatement. Returns `False` if stmt is not
 a valid IBM_DBStatement object.
-
 
 ### ibm_db.num_rows ###
 `int ibm_db.num_rows ( IBM_DBStatement stmt )`
