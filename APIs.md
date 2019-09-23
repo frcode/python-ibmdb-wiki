@@ -1388,6 +1388,8 @@ attribute.
 
 Returns the current setting of the resource attribute provided.
 
+You may refer to [Supported Options](#SupportedOptions) section for the list of options that can be set at connection and statement level.
+
 ```python
 import ibm_db
 
@@ -1946,3 +1948,24 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * TABLE_NAME - Name of the table.
 * TABLE_TYPE - Table type identifier for the table.
 * REMARKS - Description of the table.
+
+### Supported Options ###
+Python ibm_db driver supports only a subset of Db2 ODBC and CLI Driver's connection and statement level attributes. However, you can set other supported configuration keywords through db2dsdriver.cfg file. Refer to [db2dsdriver.cfg configuration keywords](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.swg.im.dbclient.config.doc/doc/c0054698.html) for more details.
+
+Connection Options:
+* SQL_ATTR_AUTOCOMMIT
+* SQL_ATTR_CURSOR_TYPE
+* SQL_ATTR_INFO_PROGRAMNAME
+* SQL_ATTR_USE_TRUSTED_CONTEXT
+* SQL_ATTR_TRUSTED_CONTEXT_USERID
+* SQL_ATTR_TRUSTED_CONTEXT_PASSWORD
+* SQL_ATTR_CURRENT_SCHEMA
+* SQL_ATTR_INFO_USERID
+* SQL_ATTR_INFO_WRKSTNNAME
+* SQL_ATTR_INFO_ACCTSTR
+* SQL_ATTR_INFO_APPLNAME
+
+
+Statement Options:
+* SQL_ATTR_ROWCOUNT_PREFETCH
+* SQL_ATTR_QUERY_TIMEOUT
