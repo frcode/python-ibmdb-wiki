@@ -1203,6 +1203,18 @@ Returns the data type of the indicated column in a result set.
 
 Returns a string containing the defined data type of the specified column or `False` if the column does not exist.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+result = ibm_db.exec_immediate(conn, "select * from tabmany")
+for i in range(0, ibm_db.num_fields(result) ):
+    print(str(i) + ":" + str(ibm_db.field_type(result,i)))
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_type.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_230_FieldTypePos.py)
 
 ### ibm_db.field_width ###
 `int ibm_db.field_width ( IBM_DBStatement stmt, mixed column )`
