@@ -1617,6 +1617,43 @@ instead of attempting a new connection.
 
 For more information on parameters and return values, see [ibm_db.connect](#ibm_dbconnect).
 
+**Example**
+```python
+import ibm_db
+
+# Open normal connection
+conn1=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+print("Normal connection 1 = {}".format(conn1))
+# Open persistent connections
+pconn1 = ibm_db.pconnect('DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password','','')
+print("Persistent connection 1 = {}".format(pconn1))
+# pconn2 is same as pconn1
+pconn2 = ibm_db.pconnect('DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password','','')
+print("Persistent connection 2 = {}".format(pconn2))
+
+# closing normal connection
+ibm_db.close(conn1)
+print("Normal connection 1 = {} closed".format(conn1))
+# closing persistent connection will not shut off the db connection
+ibm_db.close(pconn1)
+print("Persistent connection 1 = {} closed".format(pconn1))
+
+# select from the persistent connection
+sql = "select * from tabmany"
+stmt = ibm_db.exec_immediate(pconn2,sql)
+
+# fetching data from a closed connection results in error
+try:
+    sql = "select * from tabmany"
+    stmt = ibm_db.exec_immediate(conn1,sql)
+except:
+    print("Connection is closed, Hence can't execute {} on conn1".format(sql))
+    pass
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-pconnect_DB.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_trusted_context_pconnect.py)
+
 ### ibm_db.prepare ###
 `IBMDB_Statement ibm_db.prepare ( IBM_DBConnection connection, string statement [, dict options] )`
 
