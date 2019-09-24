@@ -1835,6 +1835,20 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * REMARKS - Any comments about the stored procedure.
 * PROCEDURE_TYPE - Always returns 1, indicating that the stored procedure does not return a return value.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+schemaName = 'DB2ADMIN'
+resultSet = ibm_db.procedures(conn, None, schemaName, 'PROC')
+row = ibm_db.fetch_assoc(resultSet)
+while row:
+    print(row)
+    row = ibm_db.fetch_assoc(resultSet)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-procedures.py)
 
 ### ibm_db.recreatedb ###
 `bool ibm_db.recreatedb ( IBM_DBConnection connection, string dbName [, codeSet, mode] )`
