@@ -1789,6 +1789,24 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * ORDINAL_POSITION - The 1-indexed position of the parameter in the CALL statement.
 * IS_NULLABLE - A string value where 'YES' means that the parameter accepts or returns `None` values and 'NO' means that the parameter does not accept or return `None` values.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql="""create or replace procedure proc(OUT out1 integer) dynamic result sets 1 begin  select id into out1 from tabmany where id=1; end"""
+ibm_db.exec_immediate(conn, sql)
+# note the procedure name upper case
+resultSet = ibm_db.procedure_columns(conn, None, '', 'PROC', None)
+#print(resultSet)
+row = ibm_db.fetch_assoc(resultSet)
+while row:
+    print(row)
+    print("Procedure {} is having one output parameter with name {}\n".format(row['PROCEDURE_NAME'], row['COLUMN_NAME']))
+    row = ibm_db.fetch_assoc(resultSet)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-procedure_columns.py)
 
 ### ibm_db.procedures ###
 
