@@ -1732,6 +1732,21 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * KEY_SEQ - 1-indexed position of the column in the key.
 * PK_NAME - The name of the primary key.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+stmt = ibm_db.exec_immediate(conn,"drop table test_primary_keys")
+statement = 'CREATE TABLE test_primary_keys (id INTEGER NOT NULL, PRIMARY KEY(id))'
+result = ibm_db.exec_immediate(conn, statement)
+stmt = ibm_db.primary_keys(conn, None, None, 'TEST_PRIMARY_KEYS')
+row = ibm_db.fetch_tuple(stmt)
+print("{} is primary key in table {} with index position {} in the key".format(row[3],row[2],row[4]))
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-primary_keys.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_025_PrimaryKeys.py)
 
 ### ibm_db.procedure_columns ###
 `IBM_DBStatement ibm_db.procedure_columns ( IBM_DBConnection connection, string qualifier, string schema, string procedure, string parameter )`
