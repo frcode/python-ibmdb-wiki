@@ -1868,6 +1868,19 @@ Drop and then recreates a database by using the specified database name, code se
 
 Returns `True` if specified database created successfully else return `None`.
 
+**Example**
+```python
+import ibm_db
+conn_str_attach = "attach=true;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password"
+database='test123'
+conn_attach = ibm_db.connect(conn_str_attach, '', '')
+
+rc = ibm_db.recreatedb(conn_attach, database)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-recreatedb_REMOTE.py),
+[Example2](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-recreatedb_LOCAL.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_recreateDB.py)
 
 ### ibm_db.result ###
 `mixed ibm_db.result ( IBM_DBStatement stmt, mixed column )`
