@@ -1693,6 +1693,20 @@ Returns a IBM_DBStatement object if the SQL statement was successfully
 parsed and prepared by the database server or `False` if the database
 server returned an error.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+stmt=ibm_db.prepare(conn, "select * from tabmany where id=?", {ibm_db.SQL_ATTR_CURSOR_TYPE: ibm_db.SQL_CURSOR_STATIC})
+id=1
+ibm_db.bind_param(stmt, 1,id)
+ibm_db.execute(stmt)
+row=ibm_db.fetch_tuple(stmt)
+print(row)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-prepare.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_000_PrepareDb.py)
 
 ### ibm_db.primary_keys ###
 `IBM_DBStatement ibm_db.primary_keys ( IBM_DBConnection connection, string qualifier, string schema, string table-name )`
