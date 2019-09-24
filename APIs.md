@@ -1940,6 +1940,29 @@ not recommended for use in applications that require transactions.
 
 Returns `True` on success or `False` on failure.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','',{ibm_db.SQL_ATTR_AUTOCOMMIT:  ibm_db.SQL_AUTOCOMMIT_OFF})
+
+sql = "insert into tabmany values(100, 'Testrollback')"
+stmt = ibm_db.exec_immediate(conn, sql)
+sql = "select name from tabmany where id=100"
+stmt = ibm_db.exec_immediate(conn, sql)
+res = ibm_db.fetch_tuple(stmt)
+print(res)
+
+# rollback
+rc = ibm_db.rollback(conn)
+
+# again fetch the data, should see empty row
+stmt1 = ibm_db.exec_immediate(conn, sql)
+res1 = ibm_db.fetch_tuple(stmt1)
+print(res1)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-rollback.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_021_CommitDelete.py)
 
 ### ibm_db.server_info ###
 `IBM_DBServerInfo ibm_db.server_info ( IBM_DBConnection connection )`
