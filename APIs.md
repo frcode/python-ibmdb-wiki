@@ -1539,6 +1539,21 @@ Returns an integer value representing the number of fields in the result set
 associated with the specified IBM_DBStatement. Returns `False` if stmt is not
 a valid IBM_DBStatement object.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql = "select id, name from tabmany"
+stmt = ibm_db.prepare(conn, sql,)
+result = ibm_db.execute(stmt)
+cols = ibm_db.num_fields(stmt)
+print(cols)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-num_fields.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_102_NumFieldsSelect_01.py)
+
 ### ibm_db.num_rows ###
 `int ibm_db.num_rows ( IBM_DBStatement stmt )`
 
