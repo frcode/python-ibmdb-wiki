@@ -1585,6 +1585,22 @@ with much better performance.
 Returns the number of rows affected by the last SQL statement issued by the
 specified statement handle.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+sql = "update tabmany set id=15 where id < 40"
+res = ibm_db.exec_immediate(conn, sql)
+print ("Number of affected rows: %d" % ibm_db.num_rows(res))
+ibm_db.rollback(conn)
+ibm_db.close(conn)
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-num_rows.py),
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_265_NoAffectedRows.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_011_DeleteRowCount.py),
+[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_017_selectRowcountPrefetchSTMTOpt.py)
 
 ### ibm_db.pconnect ###
 `IBM_DBStatement ibm_db.pconnect ( string database, string username, string password [, dict options] )`
