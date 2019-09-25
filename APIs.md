@@ -2013,7 +2013,7 @@ Returns a read-only object with information about the IBM DB2 or Informix server
 **Example**
 ```python
 import ibm_db
-conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'',''
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
 
 serverInfo = ibm_db.server_info(conn)
 print("Db2 database server name                 : {}" .format(serverInfo.DBMS_NAME))
@@ -2107,6 +2107,21 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * NUM_PREC_RADIX - An integer value of either 10 (representing an exact numeric data type), 2 (representing an approximate numeric data type), or `None` (representing a data type for which radix is not applicable).
 * PSEUDO_COLUMN - Always returns 1.
 
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+schemaName = "DB2ADMIN"
+tableName = "TABMANY"
+resultSet = ibm_db.special_columns(conn, None, schemaName, tableName, 0)
+dataRecord = ibm_db.fetch_assoc(resultSet)
+while dataRecord:
+    print("Column name            : {}" .format(dataRecord['COLUMN_NAME']))
+    print("Data type              : {}" .format(dataRecord['TYPE_NAME']))
+    print("Column size            : {}" .format(dataRecord['COLUMN_SIZE']))	
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-special_columns.py)
 
 ### ibm_db.statistics ###
 `IBM_DBStatement ibm_db.statistics ( IBM_DBConnection connection, string qualifier, string schema, string table-name, bool unique )`
