@@ -2009,6 +2009,20 @@ Returns a read-only object with information about the IBM DB2 or Informix server
         * INTERMEDIATE - Intermediate level SQL-92 compliance.
 * On failure, `False`
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'',''
+
+serverInfo = ibm_db.server_info(conn)
+print("Db2 database server name                 : {}" .format(serverInfo.DBMS_NAME))
+print("Database name                            : {}" .format(serverInfo.DB_NAME))
+print("Db2 instance name                        : {}" .format(serverInfo.INST_NAME))
+print("Database codepage used                   : {}" .format(serverInfo.DB_CODEPAGE))
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-server_info.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_300_ServerInfo.py)
 
 ### ibm_db.set_option ###
 `bool ibm_db.set_option ( mixed resc, dict options, int type )`
