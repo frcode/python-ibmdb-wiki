@@ -495,7 +495,7 @@ Other examples:
 [Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_082_ConnWrongPwd.py)
 
 ### ibm_db.connect ###
-`IBM_DBConnection ibm_db.connect(string database, string user, string password [, dict options [, constant replace_quoted_literal])`
+`IBM_DBConnection ibm_db.connect(string database, string user, string password , [dict options [, constant replace_quoted_literal]])`
 
 **Description**
 
