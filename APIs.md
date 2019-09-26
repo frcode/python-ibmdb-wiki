@@ -2288,6 +2288,24 @@ Returns an IBM_DBStatement with a result set containing following columns:
 * PRIVILEGE - The privilege that has been granted. This can be one of ALTER, CONTROL, DELETE, INDEX, INSERT, REFERENCES, SELECT, or UPDATE.
 * IS_GRANTABLE - A string value of "YES" or "NO" indicating whether the grantee can grant the privilege to other users.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+schemaName = "DB2ADMIN"
+tableName = "TABMANY"
+resultSet = ibm_db.table_privileges(conn, None, schemaName, tableName)
+dataRecord = ibm_db.fetch_assoc(resultSet)
+print("Schema name            : {}" .format(dataRecord['TABLE_SCHEM']))
+print("Table name             : {}" .format(dataRecord['TABLE_NAME']))
+print("Privilege grantor      : {}" .format(dataRecord['GRANTOR']))
+print("Privilege recipient    : {}" .format(dataRecord['GRANTEE']))
+print("Privilege              : {}" .format(dataRecord['PRIVILEGE']))
+print("Privilege is grantable : {}" .format(dataRecord['IS_GRANTABLE']))
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-table_privileges.py)
 
 ### ibm_db.tables ###
 `IBM_DBStatement ibm_db.tables ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string table-type]]]] )`
