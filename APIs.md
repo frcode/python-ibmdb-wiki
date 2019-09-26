@@ -2163,6 +2163,31 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * PAGES - If the row contains information about an index, this column contains an integer value representing the number of pages used to store the index. If the row contains information about the table itself, this column contains an integer value representing the number of pages used to store the table.
 * FILTER_CONDITION - Always returns `None`.
 
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+create_table = "create table index_test(id int, data VARCHAR(50))"
+rc = ibm_db.exec_immediate(conn, create_table)
+create_index = "CREATE UNIQUE INDEX index1 ON index_test (id)"
+rc = ibm_db.exec_immediate(conn, create_index)
+
+schemaName = "DB2ADMIN"
+tableName = "INDEX_TEST"
+resultSet = ibm_db.statistics(conn, None, schemaName, tableName, True)
+dataRecord = ibm_db.fetch_assoc(resultSet)
+while dataRecord['INDEX_NAME'] is not None:
+    print("Table Schema            : {}" .format(dataRecord['TABLE_SCHEM']))
+    print("Table name              : {}" .format(dataRecord['TABLE_NAME']))
+    print("Index qualifier            : {}" .format(dataRecord['INDEX_QUALIFIER']))
+    print("Index name                       : {}" .format(dataRecord['INDEX_NAME']))
+    print("Column name                      : {}" .format(dataRecord['COLUMN_NAME']))
+    print("Column position in index         : {}" .format(dataRecord['ORDINAL_POSITION']))
+    dataRecord = ibm_db.fetch_assoc(resultSet)	
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-statistics.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_197_StatisticsIndexes.py)
 
 ### ibm_db.stmt_error ###
 `string ibm_db.stmt_error ( [IBM_DBStatement stmt] )`
