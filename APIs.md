@@ -614,7 +614,7 @@ rc = ibm_db.createdb(conn_attach, database)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-createdb_REMOTE.py),
-[Example2](),https://github.com/IBM/db2-python/blob/master/Jupyter_Notebooks/ibm_db-createdb.ipynb
+[Example2](https://github.com/IBM/db2-python/blob/master/Jupyter_Notebooks/ibm_db-createdb.ipynb),
 [Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_createDropDB.py)
 
 ### ibm_db.createdbNX ###
