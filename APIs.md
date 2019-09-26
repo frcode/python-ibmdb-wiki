@@ -2107,6 +2107,7 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * NUM_PREC_RADIX - An integer value of either 10 (representing an exact numeric data type), 2 (representing an approximate numeric data type), or `None` (representing a data type for which radix is not applicable).
 * PSEUDO_COLUMN - Always returns 1.
 
+**Example**
 ```python
 import ibm_db
 conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
@@ -2163,6 +2164,7 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * PAGES - If the row contains information about an index, this column contains an integer value representing the number of pages used to store the index. If the row contains information about the table itself, this column contains an integer value representing the number of pages used to store the table.
 * FILTER_CONDITION - Always returns `None`.
 
+**Example**
 ```python
 import ibm_db
 conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
@@ -2208,6 +2210,21 @@ reason the last operation using the resource failed.
 
 Returns a string containing the SQLSTATE value or an empty string if there was no error.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+create_table = "create table index_test(id int, data VARCHAR(50)"
+try:
+    rc = ibm_db.exec_immediate(conn, create_table)
+except:
+    print("Query ' {} ' failed with ".format(create_table))
+    print("SQLSTATE = {}".format(ibm_db.stmt_error()))
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-stmt_error.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_6561_InsertNULLValues.py)
 
 ### ibm_db.stmt_errormsg ###
 `string ibm_db.stmt_errormsg ( [IBM_DBStatement stmt] )`
