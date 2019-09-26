@@ -2248,6 +2248,21 @@ operation using the resource failed.
 
 Returns a string containing the SQLCODE and error message or an empty string if there was no error.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+create_table = "create table index_test(id int, data VARCHAR(50)"
+try:
+    rc = ibm_db.exec_immediate(conn, create_table)
+except:
+    print("Query ' {} ' failed with ".format(create_table))
+    print("Error : {}".format(ibm_db.stmt_errormsg()))
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-stmt_errormsg.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_180_StmtErrMsg.py)
 
 ### ibm_db.table_privileges ###
 `IBM_DBStatement ibm_db.table_privileges ( IBM_DBConnection connection [, string qualifier [, string schema [, string table_name]]] )`
