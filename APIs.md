@@ -2341,6 +2341,25 @@ Returns an IBM_DBStatement with a result set containing the following columns:
 * TABLE_TYPE - Table type identifier for the table.
 * REMARKS - Description of the table.
 
+**Example**
+```python
+import ibm_db
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+schemaName = "DB2ADMIN"
+resultSet = ibm_db.tables(conn, None, schemaName, 'TAB%', 'TABLE')
+dataRecord = ibm_db.fetch_assoc(resultSet)
+while dataRecord:
+    print("Table schema  : {}" .format(dataRecord['TABLE_SCHEM']))
+    print("Table name    : {}" .format(dataRecord['TABLE_NAME']))
+    print("Table type    : {}" .format(dataRecord['TABLE_TYPE']))
+    print("Description   : {}" .format(dataRecord['REMARKS']))
+    dataRecord = ibm_db.fetch_assoc(resultSet)
+    print("------------------------------------------------------")	
+```
+Other examples:
+[Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-tables.py)
+
 ### Supported Options ###
 Python ibm_db driver supports only a subset of Db2 ODBC and CLI Driver's connection and statement level attributes. However, you can set other supported configuration keywords through db2dsdriver.cfg file. Refer to [db2dsdriver.cfg configuration keywords](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.swg.im.dbclient.config.doc/doc/c0054698.html) for more details.
 
