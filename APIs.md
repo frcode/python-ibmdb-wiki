@@ -745,7 +745,7 @@ successfully, or `False` if the database failed to execute the SQL statement.
 **Example**
 ```python
 import ibm_db
-import pandas
+import pandas as pd
 import ibm_db_dbi as dbi
 conn = ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
 
