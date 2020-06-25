@@ -81,7 +81,7 @@ print(connState)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-active.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_116_ConnActive.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_116_ConnActive.py)
 
 ### ibm_db.autocommit ###
 `mixed ibm_db.autocommit ( IBM_DBConnection connection [, bool value] )`
@@ -114,7 +114,7 @@ print(autocommitstatus)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-autocommit.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_051_SetAutocommit_01.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_051_SetAutocommit_01.py)
 
 ### ibm_db.bind_param ###
 `bool ibm_db.bind_param (IBM_DBStatement stmt, int parameter-number, string variable [, int parameter-type [, int data-type [, int precision [, int scale [, int size]]]]] )`
@@ -160,11 +160,11 @@ print(row)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-bind_param.py),
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_140_BindParamSelectStmt.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_141_BindParamSelectStmtMultipleParams_01.py),
-[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_142_BindParamSelectStmtMultipleParams_02.py),
-[Example5](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_144_BindParamInsertStmtPARAM_FILE.py),
-[Example6](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_145_BindRetrieveNoneEmptyString.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_140_BindParamSelectStmt.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_141_BindParamSelectStmtMultipleParams_01.py),
+[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_142_BindParamSelectStmtMultipleParams_02.py),
+[Example5](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_144_BindParamInsertStmtPARAM_FILE.py),
+[Example6](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_145_BindRetrieveNoneEmptyString.py)
 
 ### ibm_db.callproc ###
 `( IBM_DBStatement [, ...] ) ibm_db.callproc( IBM_DBConnection connection, string procname [, parameters] )`
@@ -202,8 +202,8 @@ print(out1)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-callproc.py),
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_148_CallSPDiffBindPattern_01.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_146_CallSPINAndOUTParams.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_148_CallSPDiffBindPattern_01.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_146_CallSPINAndOUTParams.py)
 
 ### ibm_db.client_info ###
 `object ibm_db.client_info ( IBM_DBConnection connection )`
@@ -247,7 +247,7 @@ if client:
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-client_info.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_310_ClientInfo.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_310_ClientInfo.py)
 
 ### ibm_db.close ###
 `bool ibm_db.close ( IBM_DBConnection connection )`
@@ -276,8 +276,8 @@ print(rc)
 ```
 Other Examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-close.py),
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_070_Close.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_071_CloseSuccess.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_070_Close.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_071_CloseSuccess.py)
 
 
 ### ibm_db.column_privileges ###
@@ -329,7 +329,7 @@ ibm_db.close(conn)
 
 **Example**
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-column_privileges.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_023_ColumnPrivileges.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_023_ColumnPrivileges.py)
 
 ### ibm_db.columns ###
 `IBM_DBStatement ibm_db.columns ( IBM_DBConnection connection [, string qualifier [, string schema [, string table-name [, string column-name]]]] )`
@@ -385,7 +385,7 @@ print("column name              : {}" .format(column_name))
 
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-columns.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_008_ColumnInfo.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_008_ColumnInfo.py)
 
 ### ibm_db.commit ###
 `bool ibm_db.commit ( IBM_DBConnection connection )`
@@ -428,7 +428,7 @@ ibm_db.close(conn)
 ```
 Other Examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-commit.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_021_CommitDelete.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_021_CommitDelete.py)
 
 ### ibm_db.conn_error ###
 `string ibm_db.conn_error ( [IBM_DBConnection connection] )`
@@ -460,7 +460,7 @@ except:
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-conn_error.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_081_ConnWrongUser.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_081_ConnWrongUser.py)
 
 ### ibm_db.conn_errormsg ###
 `string ibm_db.conn_errormsg ( [IBM_DBConnection connection] )`
@@ -492,7 +492,7 @@ except:
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-conn_errormsg.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_082_ConnWrongPwd.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_082_ConnWrongPwd.py)
 
 ### ibm_db.connect ###
 `IBM_DBConnection ibm_db.connect(string database, string user, string password , [dict options [, constant replace_quoted_literal]])`
@@ -518,24 +518,24 @@ where the parameters represent the following values:
         * `SQL_AUTOCOMMIT_ON` - AUTOCOMMIT is on
         * `SQL_AUTOCOMMIT_OFF` - AUTOCOMMIT is off
        Refer [ibm_db.autocommit](#ibm_dbautocommit) for example.
-    * `ATTR_CASE` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_008_ColumnInfo.py))
+    * `ATTR_CASE` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_008_ColumnInfo.py))
         * `CASE_NATURAL` - column names are returned in natural case.
         * `CASE_LOWER` - column names are returned in lower case.
         * `CASE_UPPER` - column names are returned in upper case.
-    * `SQL_ATTR_CURSOR_TYPE` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_cursortype.py))
+    * `SQL_ATTR_CURSOR_TYPE` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_cursortype.py))
         * `SQL_CURSOR_FORWARD_ONLY` - uses a forward-only cursor is created, which is the default and is supported on all database servers.
         * `SQL_CURSOR_KEYSET_DRIVEN` - uses a keyset-driven cursor, which is scrollable and allows random access in the result set but is currently only supported by IBM DB2 Universal Database.
         * `SQL_CURSOR_DYNAMIC` - uses a dynamic cursor
         * `SQL_CURSOR_STATIC` - uses a static cursor
-    * `SQL_ATTR_INFO_PROGRAMNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_setgetOption.py)) - A null-terminated user-defined character string, up to 20 bytes in length, used to specify the name of the application running on the client.
-    * `SQL_ATTR_USE_TRUSTED_CONTEXT` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_trusted_context_connect.py)) - When connecting to a Db2 database server that supports trusted contexts, set this attribute if you want the connection you are creating to be a trusted connection.
-    * `SQL_ATTR_TRUSTED_CONTEXT_USERID` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_trusted_context_connect.py)) - A user defined string containing a user ID. Use this on existing trusted connections to switch users. Do not use it when creating a trusted connection.
-    * `SQL_ATTR_TRUSTED_CONTEXT_PASSWORD` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_trusted_context_connect.py)) - A user defined string containing a password. Use this attribute if the database server requires a password when switching users on a trusted connection. Set this attribute after setting the attribute SQL_ATTR_TRUSTED_CONTEXT_USERID and before executing any SQL statements that access the database server.
+    * `SQL_ATTR_INFO_PROGRAMNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_setgetOption.py)) - A null-terminated user-defined character string, up to 20 bytes in length, used to specify the name of the application running on the client.
+    * `SQL_ATTR_USE_TRUSTED_CONTEXT` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_trusted_context_connect.py)) - When connecting to a Db2 database server that supports trusted contexts, set this attribute if you want the connection you are creating to be a trusted connection.
+    * `SQL_ATTR_TRUSTED_CONTEXT_USERID` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_trusted_context_connect.py)) - A user defined string containing a user ID. Use this on existing trusted connections to switch users. Do not use it when creating a trusted connection.
+    * `SQL_ATTR_TRUSTED_CONTEXT_PASSWORD` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_trusted_context_connect.py)) - A user defined string containing a password. Use this attribute if the database server requires a password when switching users on a trusted connection. Set this attribute after setting the attribute SQL_ATTR_TRUSTED_CONTEXT_USERID and before executing any SQL statements that access the database server.
     * `SQL_ATTR_CURRENT_SCHEMA` - A null-terminated character string containing the name of the schema to be used by CLI for the SQLColumns() call if the szSchemaName pointer is set to null. Refer to [ibm_db.columns](#ibm_dbcolumns) for example.
-    * `SQL_ATTR_INFO_USERID ` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_USERID attribute is used to set the client user ID (accounting user ID) that is sent to a database. The SQL_ATTR_INFO_USERID attribute is for identification purposes only and is not used for any authentication. Do not confuse the SQL_ATTR_INFO_USERID attribute with the authentication user ID. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_USERID attribute.
-    * `SQL_ATTR_INFO_WRKSTNNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_WRKSTNNAME attribute is used to set the client workstation name that is sent to a database.  The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_WRKSTNNAME attribute.
-    * `SQL_ATTR_INFO_ACCTSTR` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_ACCTSTR attribute is used to set the client accounting string that is sent to a database. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_ACCTSTR attribute.
-    * `SQL_ATTR_INFO_APPLNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_APPLNAME attribute is used to set the client application name that is sent to a database. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_APPLNAME attribute.
+    * `SQL_ATTR_INFO_USERID ` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_USERID attribute is used to set the client user ID (accounting user ID) that is sent to a database. The SQL_ATTR_INFO_USERID attribute is for identification purposes only and is not used for any authentication. Do not confuse the SQL_ATTR_INFO_USERID attribute with the authentication user ID. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_USERID attribute.
+    * `SQL_ATTR_INFO_WRKSTNNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_WRKSTNNAME attribute is used to set the client workstation name that is sent to a database.  The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_WRKSTNNAME attribute.
+    * `SQL_ATTR_INFO_ACCTSTR` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_ACCTSTR attribute is used to set the client accounting string that is sent to a database. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_ACCTSTR attribute.
+    * `SQL_ATTR_INFO_APPLNAME` ([Example](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_053_AttrThruConn.py)) - The SQL_ATTR_INFO_APPLNAME attribute is used to set the client application name that is sent to a database. The CLI driver has limit of 255 characters for the SQL_ATTR_INFO_APPLNAME attribute.
 
 For more information on these keywords, please refer [IBM data server driver configuration keywords](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.swg.im.dbclient.config.doc/doc/c0054698.html).
 
@@ -615,7 +615,7 @@ rc = ibm_db.createdb(conn_attach, database)
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-createdb_REMOTE.py),
 [Example2](https://github.com/IBM/db2-python/blob/master/Jupyter_Notebooks/ibm_db-createdb.ipynb),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_createDropDB.py)
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_createDropDB.py)
 
 ### ibm_db.createdbNX ###
 `bool ibm_db.createdbNX ( IBM_DBConnection connection, string dbName [, codeSet, mode] )`
@@ -645,7 +645,7 @@ rc = ibm_db.createdbNX(conn_attach, database)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Jupyter_Notebooks/ibm_db-createdbNX.ipynb)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_createdbNX.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_createdbNX.py)
 
 ### ibm_db.cursor_type ###
 `int ibm_db.cursor_type ( IBM_DBStatement stmt )`
@@ -677,7 +677,7 @@ cursorType = ibm_db.cursor_type(resultSet)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Jupyter_Notebooks/ibm_db-cursor_type.ipynb)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_cursortype.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_cursortype.py)
 
 ### ibm_db.dropdb ###
 `bool ibm_db.dropdb ( IBM_DBConnection connection, string dbName )`
@@ -706,7 +706,7 @@ rc = ibm_db.dropdb(conn, dbName)
 Othe examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-dropdb_LOCAL.py),
 [Example2](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-dropdb_REMOTE.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_createDropDB.py)
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_createDropDB.py)
 
 ### ibm_db.exec_immediate ###
 `stmt_handle ibm_db.exec_immediate( IBM_DBConnection connection, string statement [, dict options] )`
@@ -764,7 +764,7 @@ print(df)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-exec_immediate.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_113_DateTest.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_113_DateTest.py)
 
 ### ibm_db.execute ###
 `bool ibm_db.execute ( IBM_DBStatement stmt [, tuple parameters] )`
@@ -799,7 +799,7 @@ except:
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-execute.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_265_NoAffectedRows.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_265_NoAffectedRows.py)
 
 ### ibm_db.execute_many ###
 `mixed ibm_db.execute_many( IBM_DBStatement stmt, tuple seq_of_parameters )`
@@ -856,7 +856,7 @@ print(df3)
 ```
 Other examples:
 [Example1](http://htmlpreview.github.io/?https://github.com/IBM/db2-python/blob/master/HTML_Documentation/ibm_db-execute_many.html)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_execute_many.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_execute_many.py)
 
 ### ibm_db.fetch_tuple ###
 `tuple ibm_db.fetch_tuple ( IBM_DBStatement stmt [, int row_number] )`
@@ -890,7 +890,7 @@ ibm_db.close(conn)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-fetch_tuple.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_154_AllFetches.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_154_AllFetches.py)
 
 ### ibm_db.fetch_assoc ###
 `dict ibm_db.fetch_assoc ( IBM_DBStatement stmt [, int row_number] )`
@@ -925,9 +925,9 @@ while ( row ):
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-fetch_assoc.py),
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_151_FetchAssocSelect_02.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_153_FetchAssocSelect_04.py),
-[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_158_FetchAssocNestedSelects_02.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_151_FetchAssocSelect_02.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_153_FetchAssocSelect_04.py),
+[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_158_FetchAssocNestedSelects_02.py)
 
 ### ibm_db.fetch_both ###
 `dict ibm_db.fetch_both ( IBM_DBStatement stmt [, int row_number] )`
@@ -960,8 +960,8 @@ while ( row ):
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-fetch_both.py),
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_161_FetchBothNestedSelects_01.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_162_FetchBothNestedSelects_02.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_161_FetchBothNestedSelects_01.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_162_FetchBothNestedSelects_02.py)
 
 ### ibm_db.fetch_row ###
 `bool ibm_db.fetch_row ( IBM_DBStatement stmt [, int row_number] )`
@@ -1003,7 +1003,7 @@ while ( row ):
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-fetch_row.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_036_FetchRow_02.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_036_FetchRow_02.py)
 
 ### ibm_db.field_display_size ###
 `int ibm_db.field_display_size ( IBM_DBStatement stmt, mixed column )`
@@ -1036,7 +1036,7 @@ for i in range(0, cols):
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_display_size.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_213_FieldDisplaySize_04.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_213_FieldDisplaySize_04.py)
 
 ### ibm_db.field_name ###
 `string ibm_db.field_name ( IBM_DBStatement stmt, mixed column )`
@@ -1069,8 +1069,8 @@ print(field_name)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_name.py),
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_231_FieldTypeName.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_240_FieldWidthPosName_01.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_231_FieldTypeName.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_240_FieldWidthPosName_01.py)
 
 ### ibm_db.field_num ###
 `int ibm_db.field_num ( IBM_DBStatement stmt, mixed column )`
@@ -1113,7 +1113,7 @@ print(field_num)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_num.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_111_FieldNumAddCol.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_111_FieldNumAddCol.py)
 
 ### ibm_db.field_precision ###
 `int ibm_db.field_precision ( IBM_DBStatement stmt, mixed column )`
@@ -1214,7 +1214,7 @@ for i in range(0, ibm_db.num_fields(result) ):
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_type.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_230_FieldTypePos.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_230_FieldTypePos.py)
 
 ### ibm_db.field_width ###
 `int ibm_db.field_width ( IBM_DBStatement stmt, mixed column )`
@@ -1247,7 +1247,7 @@ for i in range(0, ibm_db.num_fields(result) ):
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-field_width.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_240_FieldWidthPosName_01.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_240_FieldWidthPosName_01.py)
 
 ### ibm_db.foreign_keys ###
 `IBM_DBStatement ibm_db.foreign_keys ( IBM_DBConnection connection, string pk_qualifier, string pk_schema, string pk_table-name, string fk_qualifier, string fk_schema, string fk_table-name )`
@@ -1313,7 +1313,7 @@ print(row[7],"is a foreign key in", row[6], "referencing", row[3], "in table", r
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-foreign_keys.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_024_ForeignKeys.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_024_ForeignKeys.py)
 
 ### ibm_db.free_result ###
 `bool ibm_db.free_result ( IBM_DBStatement stmt )`
@@ -1347,8 +1347,8 @@ ibm_db.free_result(result)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-free_result.py),
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_250_FreeResult_01.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_251_FreeResult_02.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_250_FreeResult_01.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_251_FreeResult_02.py)
 
 ### ibm_db.free_stmt ###
 `bool ibm_db.free_stmt ( IBM_DBStatement stmt )` **(DEPRECATED)**
@@ -1420,7 +1420,7 @@ ibm_db.close(conn)
 Other example:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-get_option_STATEMENT.py),
 [Example2](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-get_option_CONNECTION.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_setgetOption.py)
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_setgetOption.py)
 
 ### ibm_db.next_result ###
 `IBM_DBStatement ibm_db.next_result ( IBM_DBStatement stmt )`
@@ -1519,7 +1519,7 @@ if resultSet_3:
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-next_result.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_200_MultipleRsltsetsUniformColDefs.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_200_MultipleRsltsetsUniformColDefs.py)
 
 ### ibm_db.num_fields ###
 `int ibm_db.num_fields ( IBM_DBStatement stmt )`
@@ -1553,7 +1553,7 @@ print(cols)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-num_fields.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_102_NumFieldsSelect_01.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_102_NumFieldsSelect_01.py)
 
 ### ibm_db.num_rows ###
 `int ibm_db.num_rows ( IBM_DBStatement stmt )`
@@ -1599,9 +1599,9 @@ ibm_db.close(conn)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-num_rows.py),
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_265_NoAffectedRows.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_011_DeleteRowCount.py),
-[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_017_selectRowcountPrefetchSTMTOpt.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_265_NoAffectedRows.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_011_DeleteRowCount.py),
+[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_017_selectRowcountPrefetchSTMTOpt.py)
 
 ### ibm_db.pconnect ###
 `IBM_DBStatement ibm_db.pconnect ( string database, string username, string password [, dict options] )`
@@ -1653,7 +1653,7 @@ except:
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-pconnect_DB.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_trusted_context_pconnect.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_trusted_context_pconnect.py)
 
 ### ibm_db.prepare ###
 `IBMDB_Statement ibm_db.prepare ( IBM_DBConnection connection, string statement [, dict options] )`
@@ -1707,7 +1707,7 @@ print(row)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-prepare.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_000_PrepareDb.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_000_PrepareDb.py)
 
 ### ibm_db.primary_keys ###
 `IBM_DBStatement ibm_db.primary_keys ( IBM_DBConnection connection, string qualifier, string schema, string table-name )`
@@ -1747,7 +1747,7 @@ print("{} is primary key in table {} with index position {} in the key".format(r
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-primary_keys.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_025_PrimaryKeys.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_025_PrimaryKeys.py)
 
 ### ibm_db.procedure_columns ###
 `IBM_DBStatement ibm_db.procedure_columns ( IBM_DBConnection connection, string qualifier, string schema, string procedure, string parameter )`
@@ -1881,7 +1881,7 @@ rc = ibm_db.recreatedb(conn_attach, database)
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-recreatedb_REMOTE.py),
 [Example2](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-recreatedb_LOCAL.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_recreateDB.py)
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_recreateDB.py)
 
 ### ibm_db.result ###
 `mixed ibm_db.result ( IBM_DBStatement stmt, mixed column )`
@@ -1916,8 +1916,8 @@ while (ibm_db.fetch_row(stmt)):
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-result.py),
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_03a_ResultNonExistCol.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_031_ResultIndexPosition.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_03a_ResultNonExistCol.py),
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_031_ResultIndexPosition.py)
 
 ### ibm_db.rollback ###
 
@@ -1963,7 +1963,7 @@ print(res1)
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-rollback.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_021_CommitDelete.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_021_CommitDelete.py)
 
 ### ibm_db.server_info ###
 `IBM_DBServerInfo ibm_db.server_info ( IBM_DBConnection connection )`
@@ -2023,7 +2023,7 @@ print("Database codepage used                   : {}" .format(serverInfo.DB_CODE
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-server_info.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_300_ServerInfo.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_300_ServerInfo.py)
 
 ### ibm_db.set_option ###
 `bool ibm_db.set_option ( mixed resc, dict options, int type )`
@@ -2072,7 +2072,7 @@ ibm_db.close(conn)
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-set_option_CONNECTION.py),
 [Example2](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-set_option_STATEMENT.py),
-[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_setgetOption.py)
+[Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_setgetOption.py)
 
 ### ibm_db.special_columns ###
 `IBM_DBStatement ibm_db.special_columns ( IBM_DBConnection connection, string qualifier, string schema, string table_name, int scope )`
@@ -2189,7 +2189,7 @@ while dataRecord['INDEX_NAME'] is not None:
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-statistics.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_197_StatisticsIndexes.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_197_StatisticsIndexes.py)
 
 ### ibm_db.stmt_error ###
 `string ibm_db.stmt_error ( [IBM_DBStatement stmt] )`
@@ -2224,7 +2224,7 @@ except:
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-stmt_error.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_6561_InsertNULLValues.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_6561_InsertNULLValues.py)
 
 ### ibm_db.stmt_errormsg ###
 `string ibm_db.stmt_errormsg ( [IBM_DBStatement stmt] )`
@@ -2262,7 +2262,7 @@ except:
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-stmt_errormsg.py)
-[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/tests/test_180_StmtErrMsg.py)
+[Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_180_StmtErrMsg.py)
 
 ### ibm_db.table_privileges ###
 `IBM_DBStatement ibm_db.table_privileges ( IBM_DBConnection connection [, string qualifier [, string schema [, string table_name]]] )`
