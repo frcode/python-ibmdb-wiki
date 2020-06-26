@@ -204,7 +204,8 @@ Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-callproc.py),
 [Example2](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_148_CallSPDiffBindPattern_01.py),
 [Example3](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_146_CallSPINAndOUTParams.py),
-[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_SPInOutBlob.py)
+[Example4](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_SPInOutBlob.py),
+[Example5](https://github.com/ibmdb/python-ibmdb/blob/master/IBM_DB/ibm_db/ibm_db_tests/test_bool_callproc.py)
 
 ### ibm_db.client_info ###
 `object ibm_db.client_info ( IBM_DBConnection connection )`
