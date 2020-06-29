@@ -199,6 +199,13 @@ ibm_db.exec_immediate(conn, sql)
 out1 = 0
 stmt, out1=ibm_db.callproc(conn,'proc',(out1,))
 print(out1)
+
+result = ibm_db.exec_immediate(conn, """CREATE PROCEDURE out_blob(IN P1 BLOB(100),OUT P2 BLOB(100)) LANGUAGE SQL DYNAMIC RESULT SETS 0 BEGIN SET P2 = P1; END""")
+stmt, blob1, blob2 = ibm_db.callproc(conn, 'out_blob', (b'1234',b'0'))
+
+if stmt is not None:
+    print("Values of bound parameters _after_ CALL:")
+    print("  1: %s\t 2: %s \n" % (blob1, blob2))
 ```
 Other examples:
 [Example1](https://github.com/IBM/db2-python/blob/master/Python_Examples/ibm_db/ibm_db-callproc.py),
