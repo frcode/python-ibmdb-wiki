@@ -512,14 +512,22 @@ Creates a new connection to an IBM DB2 Universal Database, IBM Cloudscape, or Ap
 
 **Parameters**
 * database
-For a cataloged connection to a database, this parameter represents the database alias in the DB2 client catalog. For an uncataloged connection to a database, database represents a complete connection string in the following format:
+    * For a cataloged connection to a database, this parameter represents the database alias in the DB2 client catalog. For an uncataloged connection to a database, database represents a complete connection string in the following format:
 DRIVER={IBM DB2 ODBC DRIVER};DATABASE=database;HOSTNAME=hostname;PORT=port;
 PROTOCOL=TCPIP;UID=username;PWD=password;
 where the parameters represent the following values:
-    * hostname - The hostname or IP address of the database server.
-    * port - The TCP/IP port on which the database is listening for requests.
-    * username - The username with which you are connecting to the database.
-    * password - The password with which you are connecting to the database.
+        * hostname - The hostname or IP address of the database server.
+        * port - The TCP/IP port on which the database is listening for requests.
+        * username - The username with which you are connecting to the database.
+        * password - The password with which you are connecting to the database.  
+    * In case of JWT access Token based LUW server, supported from Db2 Version 11.5 Mod Pack 4 (db2_v115m4fp0) and above, database represents a complete connection string in the following format:
+DRIVER={IBM DB2 ODBC DRIVER};DATABASE=database;HOSTNAME=hostname;PORT=port;accesstoken=complete_access_token;authentication=token;accesstokentype=jwt;
+where the parameter represents the following values:
+        * hostname - The hostname or IP address of the JWT configured database server.
+        * port - The TCP/IP port on which the database is listening for requests.
+        * accesstoken - The access token generated on the server for JWT (Json Web Token) configuration.
+        * authentication - For connection using JWT access token the authentication has to be set as token.
+        * accesstokentype - For connection using JWT access token the parameter accesstokentype has be set as jwt.
 * user - The username with which you are connecting to the database. For uncataloged connections, you must pass an empty string.
 * password - The password with which you are connecting to the database. For uncataloged connections, you must pass an empty string.
 * **options** - A dict of connection options that affect the behavior of the connection:
@@ -562,6 +570,9 @@ For more information on these keywords, please refer [IBM data server driver con
 import ibm_db
 #use connection string
 conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password",'','')
+
+#use connection string with JWT access token
+conn=ibm_db.connect("DATABASE=database;HOSTNAME=hostname;PORT=port;accesstoken=complete_access_token;authentication=token;accesstokentype=jwt;",'','')
 
 #use options
 options = { ibm_db.SQL_ATTR_INFO_PROGRAMNAME : 'TestProgram', ibm_db.SQL_ATTR_CURRENT_SCHEMA : 'MYSCHEMA' }
