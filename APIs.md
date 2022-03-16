@@ -854,7 +854,7 @@ row_count = ibm_db.num_rows(stmt_insert)
 print("inserted {} rows".format(row_count))
 
 # use data frame, requires ibm_db_dbi connection
-conn1 = ibm_db.connect('DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password')
+conn1 = dbi.connect('DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=username;PWD=password')
 
 data={'ID':[11,22,33,44],'NAME':['val1','val2','val3','val4']}
 df1=pd.DataFrame(data)
